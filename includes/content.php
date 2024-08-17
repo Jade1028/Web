@@ -8,7 +8,7 @@
             <img src="img2.png" alt="image" title="Discount">
         </div>
         <div class ="item">
-            <img src="img3.png" alt="image" title="Back to school oo">
+            <img src="img3.png" alt="image" title="Back to school">
         </div>
     </div>
 
