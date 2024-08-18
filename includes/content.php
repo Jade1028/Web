@@ -1,7 +1,5 @@
-//testing123
-
 <div class="slider">
-    <div class ="list">
+    < class ="list">
         <div class ="item">
             <img src="img1.png" alt="image" title="New book arrival">
         </div>
@@ -11,7 +9,7 @@
         <div class ="item">
             <img src="img3.png" alt="image" title="Back to school">
         </div>
-    </div>
+</div>
 
 
 <!-- button for prev and next -->
