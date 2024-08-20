@@ -12,6 +12,8 @@
     <button type="submit">Search</button>
     </div>
     <div class="avatar">
+    <a href="/Web/Register">
     <img src="avatar.png" alt="avatar" title="avatar">
+    </a>
     </div>
 </header>

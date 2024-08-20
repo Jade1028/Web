@@ -2,12 +2,12 @@
 <html>
     <head>
         <title>GoBook</title>
-        <link rel="stylesheet" href ="../assignment/style/mystyle.css">
+        <link rel="stylesheet" href ="style/mystyle.css">
     </head>
     <body>
-    <?php include('../assignment/includes/header.php'); ?>
-    <?php include('../assignment/includes/content.php'); ?>
-    <?php include('../assignment/includes/footer.php'); ?>
+    <?php include('includes/header.php'); ?>
+    <?php include('includes/content.php'); ?>
+    <?php include('includes/footer.php'); ?>
     <script src="function.js"></script>
     </body>
 </html>
