@@ -358,7 +358,6 @@ html{
     } 
  }
 
-/* Wrapper styling */
 #contentWrapper1 {
     max-width: 500px;
     margin: 0 auto;
@@ -369,14 +368,12 @@ html{
     font-family: Arial, sans-serif;
 }
 
-/* Form label styling */
 form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-/* Input field styling */
 form input[type="text"],
 form input[type="date"],
 form input[type="tel"],
@@ -389,20 +386,17 @@ form input[type="password"] {
     font-size: 16px;
 }
 
-/* Radio button styling */
 form input[type="radio"] {
     margin-right: 5px;
     margin-left: 10px;
 }
 
-/* Error message styling */
 form div[id$="Error"] {
     color: red;
     font-size: 12px;
     margin-bottom: 10px;
 }
 
-/* Button styling */
 form input[type="button"] {
     padding: 10px 20px;
     background-color: #28a745;
@@ -413,7 +407,6 @@ form input[type="button"] {
     cursor: pointer;
 }
 
-/* Button hover effect */
 form input[type="button"]:hover {
     background-color: #218838;
 }
