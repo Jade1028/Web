@@ -6,12 +6,11 @@
     </head>
 
     <body>
-    <?php include('includes/header.php'); ?>
-
+        
     <h1>Register</h1>
 
-    <div id="contentWrapper" class="content">
-        <form id = "registrationForm" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
+    <div id="contentWrapper1" class="content">
+        <form id = "registrationForm" action = "post-message.php" method = "post">
             <label for = "name"> Name: </label>
             <input type = "text" id = "name" name = "name">
             <div id = "nameError"></div>
