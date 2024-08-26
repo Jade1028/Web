@@ -2,7 +2,7 @@
     <div class="logo"><a href ="">GoBook</a></div>
     <nav>
         <ul>
-            <li><a href ="">Home</a></li>
+            <li><a href ="/Web/index">Home</a></li>
             <li><a href ="">Contact Us</a></li>
             <li><a href ="">View My Cart</a></li>
         </ul>

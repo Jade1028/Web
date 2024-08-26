@@ -11,7 +11,7 @@
     <h1>Register</h1>
 
     <div id="contentWrapper" class="content">
-        <form id = "registrationForm" action = "post-message.php" method = "post">
+        <form id = "registrationForm" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
             <label for = "name"> Name: </label>
             <input type = "text" id = "name" name = "name">
             <div id = "nameError"></div>
@@ -51,70 +51,143 @@
     <br>
     <?php include('includes/footer.php'); ?>
 
-    <!--
+    
     <script>
         function validateForm() 
         {
             let isValid = true;
 
         //clear previous error messages
-        document.querySelecorAll('#registrationForm div').forEach(function(div)
+        document.querySelectorAll('#registrationForm div').forEach(function(div)
         {
             div.textContent = '';
         });
 
-    // Validate Name
-    const name = document.getElementById("name").value;
-    if (name.trim() === "") {
-        document.getElementById("nameError").textContent = "Name is required.";
-        isValid = false;
+        // Validate Name
+        const name = document.getElementById("name").value;
+        if (name.trim() === "") {
+            document.getElementById("nameError").textContent = "Name is required.";
+            isValid = false;
+        }
+
+        // Validate Date of Birth
+        const dob = document.getElementById("dob").value;
+        if (dob.trim() === "") {
+            document.getElementById("dobError").textContent = "Date of Birth is required.";
+            isValid = false;
+        }
+
+        // Validate Gender
+        const gender = document.querySelector('input[name="gender"]:checked');
+        if (gender === null) {
+            document.getElementById("genderError").textContent = "Gender is required.";
+            isValid = false;
+        }
+
+        // Validate Phone Number
+        const phone = document.getElementById("phone").value;
+        if (phone.trim() === "") {
+            document.getElementById("phoneError").textContent = "Phone number is required.";
+            isValid = false;
+        }
+
+        // Validate Email
+        const email = document.getElementById("email").value;
+        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if (email.trim() === "") {
+            document.getElementById("emailError").textContent = "Email address is required.";
+            isValid = false;
+        } else if (!email.match(emailPattern)) {
+            document.getElementById("emailError").textContent = "Please enter a valid email address.";
+            isValid = false;
+        }
+
+        // Validate Password
+        const password = document.getElementById("pw").value;
+        if (password.trim() === "") {
+            document.getElementById("pwError").textContent = "Password is required.";
+            isValid = false;
+        }
+        else if (password.length < 8) {
+            document.getElementById("pwError").textContent = "Password must be at least 8 characters long.";
+            isValid = false;
+        }
+
+        // Submit the form if all validations pass
+        if (isValid) {
+            document.getElementById("registrationForm").submit();
+        }
     }
 
-    // Validate Date of Birth
-    const dob = document.getElementById("dob").value;
-    if (dob.trim() === "") {
-        document.getElementById("dobError").textContent = "Date of Birth is required.";
-        isValid = false;
-    }
+</script>
 
-    // Validate Gender
-    const gender = document.querySelector('input[name="gender"]:checked');
-    if (gender === null) {
-        document.getElementById("genderError").textContent = "Gender is required.";
-        isValid = false;
-    }
+<?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Handle the form submission
+            $name = $_POST['name'];
+            $dob = $_POST['dob'];
+            $gender = $_POST['gender'];
+            $phone = $_POST['phone'];
+            $email = $_POST['email'];
+            $password = $_POST['pw'];
 
-    // Validate Phone Number
-    const phone = document.getElementById("phone").value;
-    if (phone.trim() === "") {
-        document.getElementById("phoneError").textContent = "Phone number is required.";
-        isValid = false;
-    }
+            $servername = "localhost";
+            $username = "root";
+            $DBpassword = "";
 
-    // Validate Email
-    const email = document.getElementById("email").value;
-    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    if (email.trim() === "") {
-        document.getElementById("emailError").textContent = "Email address is required.";
-        isValid = false;
-    } else if (!email.match(emailPattern)) {
-        document.getElementById("emailError").textContent = "Please enter a valid email address.";
-        isValid = false;
-    }
+            $conn = new mysqli($servername, $username, $DBpassword);
 
-    // Validate Password
-    const password = document.getElementById("pw").value;
-    if (password.trim() === "") {
-        document.getElementById("pwError").textContent = "Password is required.";
-        isValid = false;
-    }
-
-    // Submit the form if all validations pass
-    if (isValid) {
-        document.getElementById("registrationForm").submit();
-    }
-}
--->
+            if ($conn->connect_error) 
+            {
+                die("Connection failed: " . $conn->connect_error);
+            }
+        
+            // Create database if it doesn't exist
+            $sql = "CREATE DATABASE IF NOT EXISTS GoBookDB";
+            if ($conn->query($sql) === FALSE) 
+            {
+                echo "Error creating database: " . $conn->error;
+            }
+        
+            // Select the database
+            $conn->select_db("GoBookDB");
+        
+            // Create table if it doesn't exist
+            $sql = "CREATE TABLE IF NOT EXISTS UserInfo (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        name VARCHAR(255) NOT NULL,
+                        dob DATE NOT NULL,
+                        gender ENUM('Male', 'Female', 'Other') NOT NULL,
+                        phone VARCHAR(15) NOT NULL,
+                        email VARCHAR(255) NOT NULL,
+                        password VARCHAR(255) NOT NULL
+                    )";
+            if ($conn->query($sql) === FALSE) 
+            {
+                echo "Error creating table: " . $conn->error;
+            } 
+        
+            // Insert the user data into the table
+            $stmt = $conn->prepare("INSERT INTO UserInfo (name, dob, gender, phone, email, password) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssss", $name, $dob, $gender, $phone, $email, $password);
+        
+            if ($stmt->execute()) 
+            {
+                // Display success message and link back to index.php
+                echo "<script>
+                    alert('Registration Successful! Your information has been successfully saved.');
+                    window.location.href = 'index.php';
+                </script>";
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+        
+            // Close the statement and connection
+            $stmt->close();
+            $conn->close();
+        
+        }
+    ?>
 
 </body>
 
