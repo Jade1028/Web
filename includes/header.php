@@ -12,8 +12,35 @@
     <button type="submit">Search</button>
     </div>
     <div class="avatar">
-    <a href="/Web/login">
     <img src="avatar.png" alt="avatar" title="avatar">
-    </a>
     </div>
 </header>
+
+
+<div id="loginPopup" class="popup">
+    <div class="popup-content">
+        <span class="close">&times;</span>
+        <?php include('login.php'); ?> 
+    </div>
+</div>
+
+<script>
+    document.getElementById('avatar').onclick = function() 
+{
+    document.getElementById('loginPopup').style.display = 'block';
+    console.log("avatar clicked");
+};
+
+document.querySelector('.close').onclick = function() 
+{
+    document.getElementById('loginPopup').style.display = 'none';
+};
+
+window.onclick = function(event) 
+{
+    if (event.target == document.getElementById('loginPopup')) 
+    {
+        document.getElementById('loginPopup').style.display = 'none';
+    }
+};
+</script>

@@ -99,3 +99,4 @@ previewBox.forEach(preview => {
     previewContainer.style.display = 'none';
   };
 });
+

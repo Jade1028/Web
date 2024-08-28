@@ -1,4 +1,5 @@
 
+<div class = "content">
 <form id="loginForm" method="post" action="">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
@@ -10,26 +11,8 @@
 </form>
 
 <a href = "Register.php">Register</a>
+<div>
 
-<script>
-    document.getElementById('avatar').onclick = function() 
-    {
-        document.getElementById('loginPopup').style.display = 'block';
-    };
-
-    document.querySelector('.close').onclick = function() 
-    {
-        document.getElementById('loginPopup').style.display = 'none';
-    };
-
-    window.onclick = function(event) 
-    {
-        if (event.target == document.getElementById('loginPopup')) 
-        {
-            document.getElementById('loginPopup').style.display = 'none';
-        }
-    };
-</script>
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
