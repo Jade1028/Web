@@ -10,7 +10,7 @@
     <h1>Register</h1>
 
     <div id="contentWrapper1" class="content">
-        <form id = "registrationForm" action = "post-message.php" method = "post">
+        <form id = "registrationForm" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
             <label for = "name"> Name: </label>
             <input type = "text" id = "name" name = "name">
             <div id = "nameError"></div>
@@ -165,22 +165,35 @@
             {
                 echo "Error creating table: " . $conn->error;
             } 
-        
-            // Insert the user data into the table
-            $stmt = $conn->prepare("INSERT INTO UserInfo (name, dob, gender, phone, email, password) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssss", $name, $dob, $gender, $phone, $email, $password);
-        
-            if ($stmt->execute()) 
+
+            $checkQuery = "SELECT * FROM UserInfo WHERE email = '$email'";
+            $checkResult = mysqli_query($conn, $checkQuery);
+    
+            if(mysqli_num_rows($checkResult) > 0)
             {
-                // Display success message and link back to index.php
-                echo "<script>
+                echo 'Email already exists. Please use a different email. ';
+            }
+            else
+            {
+                $hashed_password= md5($password);
+
+                // Insert the user data into the table
+                $stmt = $conn->prepare("INSERT INTO UserInfo (name, dob, gender, phone, email, password) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("ssssss", $name, $dob, $gender, $phone, $email, $hashed_password);
+        
+                if ($stmt->execute()) 
+                {
+                    // Display success message and link back to index.php
+                    echo "<script>
                     alert('Registration Successful! Your information has been successfully saved.');
                     window.location.href = 'index.php';
-                </script>";
-            } else {
-                echo "Error: " . $stmt->error;
+                    </script>";
+                } else 
+                {
+                    echo "Error: " . $stmt->error;
+                }
             }
-        
+
             // Close the statement and connection
             $stmt->close();
             $conn->close();

@@ -9,7 +9,7 @@
     <button type="submit">Login</button>
 </form>
 
-
+<a href = "Register.php">Register</a>
 
 <script>
     document.getElementById('avatar').onclick = function() 
@@ -35,6 +35,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $hashed_password = md5($password);
 
     // Connect to the database and handle the login
     $servername = "localhost";
@@ -58,13 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     {
         $row = $result->fetch_assoc();
 
-        if(password_verify($password, $row['password']))
+        if($hashed_password === $row['password'])
         {
             $stmt = $conn->prepare("SELECT * FROM UserInfo WHERE email = ?");
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $userInfo = $stmt->get_result();
-            echo $userInfo;
+            echo "<script>
+            alert('Successfully logged in. ');
+            window.location.href = 'index.php';
+            </script>";
         }
         else
         {
