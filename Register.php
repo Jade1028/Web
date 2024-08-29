@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>  
     <head>
-        <title>Contact Us</title>
+        <title>Registration page</title>
         <link rel="stylesheet" href ="style/mystyle.css">
     </head>
 

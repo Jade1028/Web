@@ -176,7 +176,7 @@ h1{
 }
 
 .dots li.active{
-    width: 30px;
+    width: 40px;
 }
 
 @media screen and (max-width: 768px){

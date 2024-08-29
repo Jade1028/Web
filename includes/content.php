@@ -9,8 +9,7 @@
         <div class ="item">
             <img src="img3.png" alt="image" title="Back to school">
         </div>
-      </div>
-</div>
+   </div>
 
 
 <!-- button for prev and next -->

@@ -3,7 +3,7 @@
     <nav>
         <ul>
             <li><a href ="/Web/index">Home</a></li>
-            <li><a href ="">Contact Us</a></li>
+            <li><a href ="/Web/contact">Contact Us</a></li>
             <li><a href ="">View My Cart</a></li>
         </ul>
     </nav>
@@ -15,7 +15,6 @@
     <img src="avatar.png" alt="avatar" title="avatar">
     </div>
 </header>
-
 
 <div id="loginPopup" class="popup">
     <div class="popup-content">
