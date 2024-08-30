@@ -30,29 +30,28 @@
 <div class="container">
 
    <h3 class="title"> OUR PRODUCTS </h3>
+   <div class="same-types">
+      <h5> Historical Fiction</h5>
+      <div class="products-container">
+         <div class="product" data-name="p-1">
+            <img src="test.png" alt="png">
+            <h3>Title of books</h3>
+            <div class="price">RM 49.99</div>
+         </div>
 
-   <div class="products-container">
+         <div class="product" data-name="p-2">
+            <img src="test.png" alt="png">
+            <h3>Title of books</h3>
+            <div class="price">RM 49.99</div>
+         </div>
 
-      <div class="product" data-name="p-1">
-         <img src="test.png" alt="png">
-         <h3>Title of books</h3>
-         <div class="price">RM 49.99</div>
+         <div class="product" data-name="p-3">
+            <img src="test.png" alt="png">
+            <h3>Title of books</h3>
+            <div class="price">RM 49.99</div>
+         </div>
       </div>
-
-      <div class="product" data-name="p-2">
-         <img src="test.png" alt="png">
-         <h3>Title of books</h3>
-         <div class="price">RM 49.99</div>
-      </div>
-
-      <div class="product" data-name="p-3">
-         <img src="test.png" alt="png">
-         <h3>Title of books</h3>
-         <div class="price">RM 49.99</div>
-      </div>
-
-    </div>
-
+   </div>
 </div>
 
 <div class="products-preview">

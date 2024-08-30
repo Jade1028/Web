@@ -15,7 +15,7 @@
     <img src="avatar.png" alt="avatar" title="avatar">
     </div>
 </header>
-
+<!--
 <div id="loginPopup" class="popup">
     <div class="popup-content">
         <span class="close">&times;</span>
@@ -43,3 +43,4 @@ window.onclick = function(event)
     }
 };
 </script>
+-->

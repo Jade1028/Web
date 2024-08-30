@@ -202,6 +202,18 @@ html{
     color: black;
     margin-bottom: 3rem;
     text-align: center;
+    text-decoration: underline overline;
+}
+
+.container .same-types{
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+.container .same-types h5{
+    font-size: 2.5rem;
+    color: black;
+    text-align: left;
     text-decoration: underline;
 }
 
