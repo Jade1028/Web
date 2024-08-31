@@ -26,7 +26,7 @@
     </ul>
 </div>
 
-<!-- Books -->
+<!-- Books
  <div class="container">
 
    <h3 class="title"> OUR PRODUCTS </h3>
@@ -35,7 +35,7 @@
       <div class="products-container">
          <div class="product" data-name="hf-1">
             <img src="images/hf_1.png" alt="png">
-            <h3>The Bright Sword</h3>
+            <h3></h3>
             <div class="price">RM 64.99</div>
          </div>
 
@@ -188,7 +188,149 @@
       </div>
    </div>
 </div>
+-->
+<div class="container">
+   <?php
+   // Database connection
+   $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
 
+   if (!$conn) {
+       die("Connection failed: " . mysqli_connect_error());
+   }
+
+   $sql = "CREATE TABLE IF NOT EXISTS Product (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      book_image VARCHAR(255) NOT NULL,
+      book_name VARCHAR(255) NOT NULL,
+      author VARCHAR(255) NOT NULL,
+      price VARCHAR(255) NOT NULL,
+      description TEXT NOT NULL,
+      category VARCHAR(255) NOT NULL
+  )";
+
+  if ($conn->query($sql) === FALSE) 
+  {
+      echo "Error creating table: " . $conn->error;
+  } 
+
+   function getFileContents($filePath) {
+      if (file_exists($filePath)) {
+          return file_get_contents($filePath);
+      } else {
+          return '';
+      }
+  }
+  
+  // Image and text file paths
+  $products = [
+      [
+          'image' => 'images/hf_1.png',
+          'name' => 'The Bright Sword',
+          'author' => 'Lev Grossman',
+          'price' => 'RM 64.99',
+          'description_file' => 'description/hf_1.txt',
+          'category' => 'Historical Fiction'
+      ],
+
+      [
+         'image' => 'images/hf_2.png',
+         'name' => 'The Lion Women of Tehran',
+         'author' => 'Marjan Kamali',
+         'price' => 'RM 69.99',
+         'description_file' => 'description/hf_2.txt',
+         'category' => 'Historical Fiction'
+     ],
+     [
+      'image' => 'images/hf_3.png',
+      'name' => 'The Briar Club',
+      'author' => 'Kate Quinn',
+      'price' => 'RM 49.99',
+      'description_file' => 'description/hf_3.txt',
+      'category' => 'Historical Fiction'
+  ],
+      // Add more products here as needed
+  ];
+  
+  foreach ($products as $product) {
+      $imagePath = $product['image'];
+      $bookName = $product['name'];
+      $author = $product['author'];
+      $price = $product['price'];
+      $description = getFileContents($product['description_file']);
+      $category = $product['category'];
+
+      // Check if the product already exists
+      $checkStmt = $conn->prepare("SELECT id FROM Product WHERE book_name = ? AND author = ?");
+      $checkStmt->bind_param('ss', $bookName, $author);
+      $checkStmt->execute();
+      $checkStmt->store_result();
+      
+      if ($checkStmt->num_rows === 0) {
+         // Prepare SQL statement for inserting new product
+         $stmt = $conn->prepare("INSERT INTO Product (book_image, book_name, author, price, description, category) VALUES (?, ?, ?, ?, ?, ?)");
+         $stmt->bind_param('ssssss', $imagePath, $bookName, $author, $price, $description, $category);
+         
+         // Execute SQL statement
+         if ($stmt->execute()) {
+             // Success: Product inserted
+             // No output for existing products
+         } else {
+             echo "Error: " . $stmt->error . "<br>";
+         }
+          
+          $stmt->close();
+      }
+      
+      $checkStmt->close();
+  }
+  
+   // Query to retrieve all products
+   $sql = "SELECT * FROM Product";
+   $result = $conn->query($sql);
+
+   if ($result->num_rows > 0) {
+      echo '<h3 class="title"> OUR PRODUCTS </h3>';
+      echo '<h5> Historical Fiction</h5>';
+      echo '<div class="same-types">';
+      echo '<div class="products-container">';
+  
+      // Loop through each product and display it
+      while ($row = $result->fetch_assoc()) {
+         echo '
+         <div class="product" data-name="product-' . $row['id'] . '">
+            <img src="' . $row['book_image'] . '" alt="Product Image">
+            <h3>' . $row['book_name'] . '</h3>
+            <div class="price">' . $row['price'] . '</div>
+         </div>';
+      }
+      
+      echo '</div>'; // Close products-container
+      echo '<div class="products-preview">';
+      $result->data_seek(0); // Reset the result pointer to the beginning
+      while ($row = $result->fetch_assoc()) {
+         echo '
+         <div class="preview" data-target="product-' . $row['id'] . '">
+            <img src="' . $row['book_image'] . '" alt="Product Image">
+            <div class="close">X</div>
+            <h3>' . $row['book_name'] . '</h3>
+            <h6>By ' . $row['author'] . '</h6>
+            <p>' . nl2br(htmlspecialchars($row['description'])) . '</p>
+            <div class="price">' . $row['price'] . '</div>
+            <div class="cartButton">
+               <a href="#" class="cart">add to cart</a>
+            </div>
+         </div>';
+      }
+      
+      echo '</div>'; // Close products-preview
+      echo '</div>'; // Close same-types
+  } else {
+      echo "No products found.";
+  }
+   $conn->close();
+   ?>
+
+</div> <!-- Close container -->
 <!--
 https://www.goodreads.com/  our references
 -->
