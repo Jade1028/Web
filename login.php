@@ -11,7 +11,7 @@
 </form>
 
 <a href = "Register.php">Register</a>
-<div>
+</div>
 
 
 <?php

@@ -8,17 +8,18 @@
         </ul>
     </nav>
     <div class="search">
-    <input type="text" placeholder="Search here">
-    <button type="submit">Search</button>
+        <input type="text" placeholder="Search here">
+        <button type="submit">Search</button>
     </div>
     <div class="avatar">
-    <img src="avatar.png" alt="avatar" title="avatar">
+        <img src="avatar.png" alt="avatar" title="avatar" id="avatar">
     </div>
 </header>
-<!--
+
+
 <div id="loginPopup" class="popup">
     <div class="popup-content">
-        <span class="close">&times;</span>
+        <span class="close">×</span>
         <?php include('login.php'); ?> 
     </div>
 </div>
@@ -43,4 +44,3 @@ window.onclick = function(event)
     }
 };
 </script>
--->
