@@ -44,7 +44,7 @@
             <br>
 
             <br><br>
-            <input type = "button" value="Send" onclick="validateForm()">
+            <input type = "button" value="Register" onclick="validateForm()">
         </form>
 
         <br>
