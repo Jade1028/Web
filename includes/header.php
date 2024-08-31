@@ -20,7 +20,17 @@
 <div id="loginPopup" class="popup">
     <div class="popup-content">
         <span class="close">×</span>
-        <?php include('login.php'); ?> 
+        <?php 
+        session_start();
+        if (isset($_SESSION['email'])) 
+        {
+            include('account.php'); // User is logged in, show account details
+        } 
+        else 
+        {
+            include('login.php'); // User is not logged in, show login form
+        } 
+        ?> 
     </div>
 </div>
 
@@ -28,7 +38,6 @@
     document.getElementById('avatar').onclick = function() 
 {
     document.getElementById('loginPopup').style.display = 'block';
-    console.log("avatar clicked");
 };
 
 document.querySelector('.close').onclick = function() 

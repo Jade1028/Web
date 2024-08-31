@@ -6,8 +6,9 @@
     </head>
 
     <body>
-        
-    <h1>Register</h1>
+        <header>        
+            <h1>Register</h1>
+        </header>
 
     <div class="content">
         <form id = "registrationForm" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
@@ -45,6 +46,9 @@
             <br><br>
             <input type = "button" value="Send" onclick="validateForm()">
         </form>
+
+        <br>
+        <a href = "index.php">Login</a>
     </div>
 
     <br>
@@ -175,7 +179,7 @@
             }
             else
             {
-                $hashed_password= md5($password);
+                $hashed_password= password_hash($password, PASSWORD_DEFAULT);
 
                 // Insert the user data into the table
                 $stmt = $conn->prepare("INSERT INTO UserInfo (name, dob, gender, phone, email, password) VALUES (?, ?, ?, ?, ?, ?)");
