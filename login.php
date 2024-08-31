@@ -9,16 +9,25 @@
     <br>
     <button type="submit">Login</button>
 </form>
-
+<br>
 <a href = "Register.php">Register</a>
 </div>
 
 
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+/*
+if (isset($_SESSION['email']))
+{
+    //header('Location: index.php');
+    exit();
+}
+*/
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $hashed_password = md5($password);
 
     // Connect to the database and handle the login
     $servername = "localhost";
@@ -28,8 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = new mysqli($servername, $username, $DBpassword, $database);
 
+    if ($conn->connect_error) 
+    {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
     // Validate login credentials (example)
-    $stmt = $conn->prepare("SELECT password FROM UserInfo WHERE email = ?");
+    $stmt = $conn->prepare("SELECT * FROM UserInfo WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -42,12 +56,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     {
         $row = $result->fetch_assoc();
 
-        if($hashed_password === $row['password'])
+        if(password_verify($password, $row['password']))
         {
-            $stmt = $conn->prepare("SELECT * FROM UserInfo WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $userInfo = $stmt->get_result();
+            $_SESSION['name'] = $row['name'];
+            $_SESSION['dob'] = $row['dob'];
+            $_SESSION['gender'] = $row['gender'];
+            $_SESSION['phone'] = $row['phone'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['pw'] = $row['pw'];
+
             echo "<script>
             alert('Successfully logged in. ');
             window.location.href = 'index.php';

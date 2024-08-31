@@ -6,11 +6,7 @@
     </head>
     <body>
     <?php include('includes/header.php'); ?>
-
-    <div id="mainContent">
-        <?php include('includes/content.php'); ?>
-    </div>
-
+    <?php include('includes/content.php'); ?>
     <?php include('includes/footer.php'); ?>
     <script src="function.js"></script>
     </body>

@@ -470,7 +470,3 @@ form button[type="submit"]:hover {
     font-size: 20px;
     cursor: pointer;
 }
-
-#mainContent {
-    display: block;
-}
