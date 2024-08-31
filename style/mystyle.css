@@ -208,9 +208,10 @@ html{
 .container .same-types{
     border: 2px solid black;
     border-radius: 8px;
+    margin: 10px;
 }
 
-.container .same-types h5{
+.container h5{
     font-size: 2.5rem;
     color: black;
     text-align: left;
@@ -221,6 +222,7 @@ html{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap:2rem;
+    object-fit: cover;
  }
  
  .container .products-container .product{
@@ -281,6 +283,8 @@ html{
     position: relative;
     margin:2rem;
     width: 40rem;
+    max-height: 70vh; /* Set a maximum height for the preview */
+    overflow-y: auto; /* Enable vertical scrolling */
  }
  
  .products-preview .preview.active1{
@@ -301,12 +305,18 @@ html{
  
  .products-preview .preview .close:hover{
     transform: rotate(90deg);
+    color: red;
  }
  
  .products-preview .preview h3{
-    color:#444;
+    color: black;
     padding:.5rem 0;
     font-size: 2.5rem;
+ }
+
+ .products-preview .preview h6{
+    color: grey;
+    font-size: 1.5rem;
  }
  
  .products-preview .preview p{
@@ -314,6 +324,7 @@ html{
     padding:1rem 0;
     font-size: 1.6rem;
     color:#777;
+    text-align: justify;
  }
  
  .products-preview .preview .price{
