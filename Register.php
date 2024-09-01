@@ -34,7 +34,7 @@
             <br>
 
             <label for = "email"> Email Address: </label>
-            <input type = "text" id = "email" name = "email">
+            <input type = "email" id = "email" name = "email">
             <div id = "emailError"></div>
             <br>
 
