@@ -347,8 +347,8 @@ echo '<div class="container">';
             <div class="cartButton">
                <input type="submit" value="Add to cart" name="cart" class="cart">
             </div>
-         </form>
-         </div>';
+         </div>
+         </form>';
       }
       
       echo '</div>'; // Close products-preview
