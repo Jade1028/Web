@@ -190,10 +190,16 @@
 </div>
 -->
 <?php
-// if(!isset($_SESSION['email'])){
-//    header('Location: login.php');
-//    exit();
-// }
+if (session_status() === PHP_SESSION_NONE) {
+   session_start();
+}
+
+if(!isset($_SESSION['email'])){
+   header('Location: login.php');
+   exit();
+}
+
+
 
 echo '<div class="container">';
    // Database connection
@@ -353,14 +359,16 @@ echo '<div class="container">';
 
    echo'</div>'; //Close container
 
+   echo '<script>console.log("' . $_SESSION['email'] . '");</script>';
+
    if (isset($_POST['cart'])) {
-      $email = isset($_SESSION['email']);
+      $email = $_SESSION['email'];
       $cartBookName = $_POST['book_name'];
       $cartBookImage = $_POST['book_image'];
       $cartBookPrice = $_POST['price'];
       $cartQuantity = $_POST['quantity'];
    }
-
+   
    // Insert product details into the Cart table
    $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
    $cartStmt->bind_param('ssssi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
