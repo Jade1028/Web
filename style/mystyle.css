@@ -263,7 +263,7 @@ html{
     color:rgb(68, 68, 68);
  }
  
-.products-preview{
+ .products-preview{
    position: fixed;
    top:0;
    left:0;
@@ -275,7 +275,7 @@ html{
    justify-content: center;
 }
  
- .products-preview .preview{
+.products-preview .preview{
     display: none;
     padding:2rem;
     text-align: center;
@@ -283,13 +283,13 @@ html{
     position: relative;
     margin:2rem;
     width: 40rem;
-    max-height: 70vh; /* Set a maximum height for the preview */
-    overflow-y: auto; /* Enable vertical scrolling */
- }
+    max-height: 70vh;
+    overflow-y: auto;
+}
  
- .products-preview .preview.active1{
+.products-preview .preview.active1{
     display: inline-block;
- }
+}
  
  .products-preview .preview img{
     height: 30rem;
@@ -332,6 +332,14 @@ html{
     font-size: 2.5rem;
     color:#27ae60;
  }
+
+ .products-preview .preview input[type="number"]{
+    width: 25%;
+    border-radius: 5px;
+    font-size: 20px;
+    border: 3px solid black;
+    padding: 10px;
+ }
  
  .products-preview .preview .cartButton{
     display: flex;
@@ -340,21 +348,23 @@ html{
     margin-top: 1rem;
  }
  
- .products-preview .preview .cartButton a{
-    flex:1 1 16rem;
-    padding:1rem;
+ .products-preview .preview .cartButton input[type="submit"]{
+    flex: 1 1 16rem;
+    padding: 1rem;
     font-size: 1.8rem;
-    color:#444;
-    border:.1rem solid #444;
-    text-decoration: none;
+    color: #444;
+    border: .1rem solid #444;
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
  }
  
- .products-preview .preview .cartButton a.cart{
+ .products-preview .preview .cartButton input[type="submit"].cart{
     background: #444;
     color:#fff;
  }
  
- .products-preview .preview .cartButton a.cart:hover{
+ .products-preview .preview .cartButton input[type="submit"].cart:hover{
     background: #111;
  }
 
@@ -469,4 +479,8 @@ form button[type="submit"]:hover {
     top: 10px;
     font-size: 20px;
     cursor: pointer;
+}
+
+input[type="email"] {
+    text-transform: lowercase; /* Visual enforcement */
 }

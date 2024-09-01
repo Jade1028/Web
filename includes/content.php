@@ -189,8 +189,13 @@
    </div>
 </div>
 -->
-<div class="container">
-   <?php
+<?php
+// if(!isset($_SESSION['email'])){
+//    header('Location: login.php');
+//    exit();
+// }
+
+echo '<div class="container">';
    // Database connection
    $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
 
@@ -211,7 +216,20 @@
   if ($conn->query($sql) === FALSE) 
   {
       echo "Error creating table: " . $conn->error;
-  } 
+  }
+
+   $sql = "CREATE TABLE IF NOT EXISTS cart (
+      email VARCHAR(255) NOT NULL,
+      book_image VARCHAR(255) NOT NULL,
+      book_name VARCHAR(255) NOT NULL,
+      price VARCHAR(255) NOT NULL,
+      quantity INT NOT NULL
+   )"; 
+
+   if ($conn->query($sql) === FALSE) 
+   {
+      echo "Error creating table: " . $conn->error;
+   } 
 
    function getFileContents($filePath) {
       if (file_exists($filePath)) {
@@ -221,7 +239,6 @@
       }
   }
   
-  // Image and text file paths
   $products = [
       [
           'image' => 'images/hf_1.png',
@@ -241,13 +258,13 @@
          'category' => 'Historical Fiction'
      ],
      [
-      'image' => 'images/hf_3.png',
-      'name' => 'The Briar Club',
-      'author' => 'Kate Quinn',
-      'price' => 'RM 49.99',
-      'description_file' => 'description/hf_3.txt',
-      'category' => 'Historical Fiction'
-  ],
+         'image' => 'images/hf_3.png',
+         'name' => 'The Briar Club',
+         'author' => 'Kate Quinn',
+         'price' => 'RM 49.99',
+         'description_file' => 'description/hf_3.txt',
+         'category' => 'Historical Fiction'
+      ],
       // Add more products here as needed
   ];
   
@@ -271,10 +288,7 @@
          $stmt->bind_param('ssssss', $imagePath, $bookName, $author, $price, $description, $category);
          
          // Execute SQL statement
-         if ($stmt->execute()) {
-             // Success: Product inserted
-             // No output for existing products
-         } else {
+         if (!($stmt->execute())) {  
              echo "Error: " . $stmt->error . "<br>";
          }
           
@@ -309,6 +323,7 @@
       $result->data_seek(0); // Reset the result pointer to the beginning
       while ($row = $result->fetch_assoc()) {
          echo '
+         <form method="post" action="">
          <div class="preview" data-target="product-' . $row['id'] . '">
             <img src="' . $row['book_image'] . '" alt="Product Image">
             <div class="close">X</div>
@@ -316,21 +331,54 @@
             <h6>By ' . $row['author'] . '</h6>
             <p>' . nl2br(htmlspecialchars($row['description'])) . '</p>
             <div class="price">' . $row['price'] . '</div>
+            <input type="number" min="1" value="1" name="quantity">
+
+            <input type="hidden" name="product_id" value="' . $row['id'] . '">
+            <input type="hidden" name="book_name" value="' . $row['book_name'] . '">
+            <input type="hidden" name="book_image" value="' . $row['book_image'] . '">
+            <input type="hidden" name="price" value="' . $row['price'] . '">
+
             <div class="cartButton">
-               <a href="#" class="cart">add to cart</a>
+               <input type="submit" value="Add to cart" name="cart" class="cart">
             </div>
+         </form>
          </div>';
       }
       
       echo '</div>'; // Close products-preview
       echo '</div>'; // Close same-types
-  } else {
+   } else {
       echo "No products found.";
-  }
-   $conn->close();
-   ?>
+   }
 
-</div> <!-- Close container -->
+   echo'</div>'; //Close container
+
+   if (isset($_POST['cart'])) {
+      $email = isset($_SESSION['email']);
+      $cartBookName = $_POST['book_name'];
+      $cartBookImage = $_POST['book_image'];
+      $cartBookPrice = $_POST['price'];
+      $cartQuantity = $_POST['quantity'];
+   }
+
+   // Insert product details into the Cart table
+   $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
+   $cartStmt->bind_param('ssssi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
+    
+   if ($cartStmt->execute()) {
+      echo "Product added to cart successfully.";
+   } else {
+      echo "Error: " . $cartStmt->error;
+   }
+
+    $cartStmt->close();;
+
+$conn->close();
+   
+
+?>
+
+
 <!--
 https://www.goodreads.com/  our references
 -->

@@ -5,9 +5,14 @@
         <link rel="stylesheet" href ="style/mystyle.css">
     </head>
     <body>
-    <?php include('includes/header.php'); ?>
-    <?php include('includes/content.php'); ?>
-    <?php include('includes/footer.php'); ?>
+    <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    include('includes/header.php');
+    include('includes/content.php');
+    include('includes/footer.php');
+    ?>
     <script src="function.js"></script>
     </body>
 </html>

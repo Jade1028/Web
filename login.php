@@ -13,18 +13,16 @@
 <a href = "Register.php">Register</a>
 </div>
 
-
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-/*
-if (isset($_SESSION['email']))
-{
-    //header('Location: index.php');
+
+if (isset($_SESSION['email'])){
+    header('Location: index.php');
     exit();
 }
-*/
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -75,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('Incorrect password. Please try again. ');</script>";
         }
     } 
-
 
     $stmt->close();
     $conn->close();

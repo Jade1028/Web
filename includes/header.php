@@ -4,7 +4,7 @@
         <ul>
             <li><a href ="/Web/index">Home</a></li>
             <li><a href ="/Web/contact">Contact Us</a></li>
-            <li><a href ="">View My Cart</a></li>
+            <li><a href ="/Web/cart">View My Cart</a></li>
         </ul>
     </nav>
     <div class="search">
@@ -21,7 +21,6 @@
     <div class="popup-content">
         <span class="close">×</span>
         <?php 
-        session_start();
         if (isset($_SESSION['email'])) 
         {
             include('account.php'); // User is logged in, show account details
