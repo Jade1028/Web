@@ -484,3 +484,7 @@ form button[type="submit"]:hover {
 input[type="email"] {
     text-transform: lowercase; /* Visual enforcement */
 }
+
+input[type="email"] {
+    text-transform: lowercase; /* Visual enforcement */
+}
