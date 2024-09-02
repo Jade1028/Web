@@ -190,10 +190,16 @@
 </div>
 -->
 <?php
-// if(!isset($_SESSION['email'])){
-//    header('Location: login.php');
-//    exit();
-// }
+if (session_status() === PHP_SESSION_NONE) {
+   session_start();
+}
+
+if(!isset($_SESSION['email'])){
+   header('Location: login.php');
+   exit();
+}
+
+
 
    // Database connection
    $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
@@ -348,18 +354,17 @@ if ($result->num_rows > 0) {
             <div class="cartButton">
                <input type="submit" value="Add to cart" name="cart" class="cart">
             </div>
-         </div> <!-- Close preview -->
          </form>
-        <?php
-        }
-        ?>
-      </div> <!-- Close products-preview -->
-<?php
-} else {
-?>
-    <p>No products found.</p>
-<?php
-}
+         </div>';
+      }
+      
+      echo '</div>'; // Close products-preview
+      echo '</div>'; // Close same-types
+   } else {
+      echo "No products found.";
+   }
+
+   echo'</div>'; //Close container
 
    if (isset($_POST['cart'])) {
       $email = $_SESSION['email'];
@@ -367,10 +372,11 @@ if ($result->num_rows > 0) {
       $cartBookImage = $_POST['book_image'];
       $cartBookPrice = $_POST['price'];
       $cartQuantity = $_POST['quantity'];
+   }
 
-      // Insert product details into the Cart table
-      $cartStmt = $conn->prepare("INSERT INTO cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
-      $cartStmt->bind_param('ssssi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
+   // Insert product details into the Cart table
+   $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
+   $cartStmt->bind_param('ssssi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
     
       if ($cartStmt->execute()) {
          echo "Product added to cart successfully.";
