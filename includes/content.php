@@ -194,13 +194,6 @@ if (session_status() === PHP_SESSION_NONE) {
    session_start();
 }
 
-if(!isset($_SESSION['email'])){
-   header('Location: login.php');
-   exit();
-}
-
-
-
    // Database connection
    $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
 
