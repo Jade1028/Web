@@ -356,10 +356,13 @@ if ($result->num_rows > 0) {
             </div>
          </form>
          </div>';
+      <?php   
       }
+      ?>
       
-      echo '</div>'; // Close products-preview
-      echo '</div>'; // Close same-types
+      </div><!-- Close products-preview-->
+      </div><!-- Close same-types-->
+   <?php
    } else {
       echo "No products found.";
    }
@@ -372,7 +375,6 @@ if ($result->num_rows > 0) {
       $cartBookImage = $_POST['book_image'];
       $cartBookPrice = $_POST['price'];
       $cartQuantity = $_POST['quantity'];
-   }
 
    // Insert product details into the Cart table
    $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
@@ -386,7 +388,6 @@ if ($result->num_rows > 0) {
 
       $cartStmt->close();
    }
-
 $conn->close();
 
 ?>
