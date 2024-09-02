@@ -206,9 +206,9 @@ html{
 }
 
 .container .same-types{
-    border: 2px solid black;
+    border: 3px solid black;
     border-radius: 8px;
-    margin: 10px;
+    padding: 10px;
 }
 
 .container h5{

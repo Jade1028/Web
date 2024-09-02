@@ -27,7 +27,7 @@
 </div>
 
 <!-- Books
- <div class="container">
+<div class="container">
 
    <h3 class="title"> OUR PRODUCTS </h3>
    <h5> Historical Fiction</h5>
@@ -195,7 +195,6 @@
 //    exit();
 // }
 
-echo '<div class="container">';
    // Database connection
    $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
 
@@ -208,7 +207,7 @@ echo '<div class="container">';
       book_image VARCHAR(255) NOT NULL,
       book_name VARCHAR(255) NOT NULL,
       author VARCHAR(255) NOT NULL,
-      price VARCHAR(255) NOT NULL,
+      price INT NOT NULL,
       description TEXT NOT NULL,
       category VARCHAR(255) NOT NULL
   )";
@@ -219,10 +218,11 @@ echo '<div class="container">';
   }
 
    $sql = "CREATE TABLE IF NOT EXISTS cart (
+      id INT AUTO_INCREMENT PRIMARY KEY,
       email VARCHAR(255) NOT NULL,
       book_image VARCHAR(255) NOT NULL,
       book_name VARCHAR(255) NOT NULL,
-      price VARCHAR(255) NOT NULL,
+      price INT NOT NULL,
       quantity INT NOT NULL
    )"; 
 
@@ -244,7 +244,7 @@ echo '<div class="container">';
           'image' => 'images/hf_1.png',
           'name' => 'The Bright Sword',
           'author' => 'Lev Grossman',
-          'price' => 'RM 64.99',
+          'price' => '64.99',
           'description_file' => 'description/hf_1.txt',
           'category' => 'Historical Fiction'
       ],
@@ -253,7 +253,7 @@ echo '<div class="container">';
          'image' => 'images/hf_2.png',
          'name' => 'The Lion Women of Tehran',
          'author' => 'Marjan Kamali',
-         'price' => 'RM 69.99',
+         'price' => '69.99',
          'description_file' => 'description/hf_2.txt',
          'category' => 'Historical Fiction'
      ],
@@ -261,7 +261,7 @@ echo '<div class="container">';
          'image' => 'images/hf_3.png',
          'name' => 'The Briar Club',
          'author' => 'Kate Quinn',
-         'price' => 'RM 49.99',
+         'price' => '49.99',
          'description_file' => 'description/hf_3.txt',
          'category' => 'Historical Fiction'
       ],
@@ -298,83 +298,90 @@ echo '<div class="container">';
       $checkStmt->close();
   }
   
-   // Query to retrieve all products
-   $sql = "SELECT * FROM Product";
-   $result = $conn->query($sql);
+// Query to retrieve all products
+$sql = "SELECT * FROM Product";
+$result = $conn->query($sql);
 
-   if ($result->num_rows > 0) {
-      echo '<h3 class="title"> OUR PRODUCTS </h3>';
-      echo '<h5> Historical Fiction</h5>';
-      echo '<div class="same-types">';
-      echo '<div class="products-container">';
-  
-      // Loop through each product and display it
-      while ($row = $result->fetch_assoc()) {
-         echo '
-         <div class="product" data-name="product-' . $row['id'] . '">
-            <img src="' . $row['book_image'] . '" alt="Product Image">
-            <h3>' . $row['book_name'] . '</h3>
-            <div class="price">' . $row['price'] . '</div>
-         </div>';
-      }
-      
-      echo '</div>'; // Close products-container
-      echo '<div class="products-preview">';
+if ($result->num_rows > 0) {
+?> 
+   <div class="container">
+      <h3 class="title">OUR PRODUCTS</h3>
+      <h5>Historical Fiction</h5>
+      <div class="same-types">
+         <div class="products-container">
+            <?php
+            // Loop through each product and display it
+            while ($row = $result->fetch_assoc()) {
+            ?>
+               <div class="product" data-name="product-<?php echo htmlspecialchars($row['id']); ?>">
+               <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="Product Image">
+               <h3><?php echo htmlspecialchars($row['book_name']); ?></h3>
+               <div class="price"><?php echo 'RM'. htmlspecialchars($row['price']); ?></div>
+               </div>
+            <?php
+            }
+            ?>
+         </div> <!-- Close products-container -->
+      </div> <!-- Close same-types -->
+   </div> <!-- Close container -->
+
+      <div class="products-preview">
+      <?php
       $result->data_seek(0); // Reset the result pointer to the beginning
       while ($row = $result->fetch_assoc()) {
-         echo '
+      ?>
          <form method="post" action="">
-         <div class="preview" data-target="product-' . $row['id'] . '">
-            <img src="' . $row['book_image'] . '" alt="Product Image">
+         <div class="preview" data-target="product-<?php echo htmlspecialchars($row['id']); ?>">
+            <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="Product Image">
             <div class="close">X</div>
-            <h3>' . $row['book_name'] . '</h3>
-            <h6>By ' . $row['author'] . '</h6>
-            <p>' . nl2br(htmlspecialchars($row['description'])) . '</p>
-            <div class="price">' . $row['price'] . '</div>
+            <h3><?php echo htmlspecialchars($row['book_name']); ?></h3>
+            <h6>By <?php echo htmlspecialchars($row['author']); ?></h6>
+            <p><?php echo nl2br(htmlspecialchars($row['description'])); ?></p>
+            <div class="price"><?php echo 'RM'. htmlspecialchars($row['price']); ?></div>
             <input type="number" min="1" value="1" name="quantity">
 
-            <input type="hidden" name="product_id" value="' . $row['id'] . '">
-            <input type="hidden" name="book_name" value="' . $row['book_name'] . '">
-            <input type="hidden" name="book_image" value="' . $row['book_image'] . '">
-            <input type="hidden" name="price" value="' . $row['price'] . '">
-
+            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($row['id']); ?>">
+            <input type="hidden" name="book_name" value="<?php echo htmlspecialchars($row['book_name']); ?>">
+            <input type="hidden" name="book_image" value="<?php echo htmlspecialchars($row['book_image']); ?>">
+            <input type="hidden" name="price" value="<?php echo htmlspecialchars($row['price']); ?>">
+                     
             <div class="cartButton">
                <input type="submit" value="Add to cart" name="cart" class="cart">
             </div>
+         </div> <!-- Close preview -->
          </form>
-         </div>';
-      }
-      
-      echo '</div>'; // Close products-preview
-      echo '</div>'; // Close same-types
-   } else {
-      echo "No products found.";
-   }
-
-   echo'</div>'; //Close container
+        <?php
+        }
+        ?>
+      </div> <!-- Close products-preview -->
+<?php
+} else {
+?>
+    <p>No products found.</p>
+<?php
+}
 
    if (isset($_POST['cart'])) {
-      $email = isset($_SESSION['email']);
+      $email = $_SESSION['email'];
       $cartBookName = $_POST['book_name'];
       $cartBookImage = $_POST['book_image'];
       $cartBookPrice = $_POST['price'];
       $cartQuantity = $_POST['quantity'];
-   }
 
-   // Insert product details into the Cart table
-   $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
-   $cartStmt->bind_param('ssssi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
+      // Insert product details into the Cart table
+      $cartStmt = $conn->prepare("INSERT INTO cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
+      $cartStmt->bind_param('ssssi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
     
-   if ($cartStmt->execute()) {
-      echo "Product added to cart successfully.";
-   } else {
-      echo "Error: " . $cartStmt->error;
-   }
+      if ($cartStmt->execute()) {
+         echo "Product added to cart successfully.";
+      } else {
+         echo "Error: " . $cartStmt->error;
+      }
 
-    $cartStmt->close();;
+      $cartStmt->close();
+   }
 
 $conn->close();
-   
 
 ?>
 
