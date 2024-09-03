@@ -1,9 +1,115 @@
 <head>
 <title>GoBook-Cart</title>
-<link rel="stylesheet" href ="style/mystyle.css">
 <style>
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.shopping-cart {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.shopping-cart h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+table th,
+table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    font-size: 18px;
+}
+
+table td {
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+table img {
+    max-width: 100px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+table button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+table button:hover {
+    background-color: #0056b3;
+}
+
+.h3 {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0;
+    color: #333;
+    border-top: 1px solid #ddd;
+}
+
+.checkout-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.checkout-button:hover {
+    background-color: #218838;
+}
+
+/*
 #cartTable{
-    table{
+    width: 100%;
 	border: 5px solid rgb(0, 153, 0);
 	border-spacing: 4px;
 	padding: 2px;
@@ -36,9 +142,11 @@ td{
 	margin: none;
 	padding: 10px;
 }
-}
+*/
+
 </style>
 </head>
+
 <?php //include('includes/header.php');?>
 <div class="shopping-cart">
     <h1>My Cart</h1>
@@ -88,7 +196,7 @@ if (!$conn) {
                     <td>
                         <!-- Form to Edit Quantity -->
                         <form action="update_cart.php" method="POST" style="display: inline;">
-                            <input type="number" name="quantity" value="<?php echo htmlspecialchars($row['quantity']); ?>" min="0" style="width: 60px;">
+                            <input type="number" name="quantity" value="<?php echo htmlspecialchars($row['quantity']); ?>" min="0">
                             <input type="hidden" name="book_name" value="<?php echo htmlspecialchars($row['book_name']); ?>">
                             <button type="submit" class="edit-button">Edit</button>
                         </form>

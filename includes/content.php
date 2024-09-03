@@ -298,10 +298,11 @@ if (session_status() === PHP_SESSION_NONE) {
   }
   
 // Query to retrieve all products
-$sql = "SELECT * FROM Product";
+$sql = "SELECT * FROM Product ORDER BY category";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
+   $currentCategory = "";
 ?> 
    <div class="container">
       <h3 class="title">OUR PRODUCTS</h3>
