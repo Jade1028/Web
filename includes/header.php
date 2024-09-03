@@ -12,7 +12,7 @@
         <button type="submit">Search</button>
     </div>
     <div class="avatar">
-        <img src="avatar.png" alt="avatar" title="avatar" id="avatar">
+        <img src="/Web/images/avatar.png" alt="avatar" title="avatar" id="avatar">
     </div>
 </header>
 
