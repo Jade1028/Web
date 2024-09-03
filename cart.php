@@ -1,4 +1,6 @@
+<head>
 <title>GoBook-Cart</title>
+<link rel="stylesheet" href ="style/mystyle.css">
 <style>
 #cartTable{
     table{
@@ -36,13 +38,13 @@ td{
 }
 }
 </style>
-
+</head>
+<?php //include('includes/header.php');?>
 <div class="shopping-cart">
     <h1>My Cart</h1>
+
 <?php
 session_start();
-//include('includes/header.php');
-//include('includes/footer.php');
 $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
 $email = $_SESSION['email'];
 
@@ -117,3 +119,4 @@ if (!$conn) {
         </form>
     </div>
 </div>
+<?php include('includes/footer.php');?>
