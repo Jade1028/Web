@@ -243,7 +243,7 @@ if (session_status() === PHP_SESSION_NONE) {
           'image' => 'images/hf_1.png',
           'name' => 'The Bright Sword',
           'author' => 'Lev Grossman',
-          'price' => '64.99',
+          'price' => '65',
           'description_file' => 'description/hf_1.txt',
           'category' => 'Historical Fiction'
       ],
@@ -252,7 +252,7 @@ if (session_status() === PHP_SESSION_NONE) {
          'image' => 'images/hf_2.png',
          'name' => 'The Lion Women of Tehran',
          'author' => 'Marjan Kamali',
-         'price' => '69.99',
+         'price' => '70',
          'description_file' => 'description/hf_2.txt',
          'category' => 'Historical Fiction'
      ],
@@ -260,9 +260,17 @@ if (session_status() === PHP_SESSION_NONE) {
          'image' => 'images/hf_3.png',
          'name' => 'The Briar Club',
          'author' => 'Kate Quinn',
-         'price' => '49.99',
+         'price' => '50',
          'description_file' => 'description/hf_3.txt',
          'category' => 'Historical Fiction'
+      ],
+      [
+         'image' => 'images/k_1.png',
+         'name' => 'Harry Potter and the Philosopher\'s Stone',
+         'author' => 'Rowling, J. K.',
+         'price' => '45',
+         'description_file' => 'description/k_1.txt',
+         'category' => 'Kids'
       ],
       // Add more products here as needed
   ];
@@ -305,15 +313,30 @@ if ($result->num_rows > 0) {
    $currentCategory = "";
 ?> 
    <div class="container">
-      <h3 class="title">OUR PRODUCTS</h3>
-      <h5>Historical Fiction</h5>
-      <div class="same-types">
-         <div class="products-container">
+      <h1 class="title">OUR PRODUCTS</h1>
             <?php
             // Loop through each product and display it
             while ($row = $result->fetch_assoc()) {
+               $category = htmlspecialchars($row['category']);
+
+          // Check if the category has changed
+          if ($category != $currentCategory) {
+              // Close the previous category's container, if it's not the first one
+              if ($currentCategory != "") {
+                  echo '</div>'; // Close products-container
+                  echo '</div>'; // Close same-types
+              }
+
+              // Update current category
+              $currentCategory = $category;
+
+              // Start a new category section
+              echo '<div class="same-types">';
+              echo '<h5>' . $currentCategory . '</h5>';
+              echo '<div class="products-container">';
+          }
             ?>
-               <div class="product" data-name="product-<?php echo htmlspecialchars($row['id']); ?>">
+               <div class="product" data-name="product-<?php echo htmlspecialchars($row['id']); ?>" book-name="<?php echo htmlspecialchars($row['book_name']); ?>">
                <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="Product Image">
                <h3><?php echo htmlspecialchars($row['book_name']); ?></h3>
                <div class="price"><?php echo 'RM'. htmlspecialchars($row['price']); ?></div>

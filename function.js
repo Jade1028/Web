@@ -75,3 +75,22 @@ previewBox.forEach(preview => {
     previewContainer.style.display = 'none';
   };
 });
+
+//search
+function search() {
+  let filter = document.getElementById('searchInput').value.toUpperCase();
+  let items = document.querySelectorAll('.product');
+  let titles = document.getElementsByTagName('h3');
+
+  for (let i = 0; i < titles.length; i++) {
+      let item = items[i]; // Select the product container
+      let title = titles[i]; // Get the <h3> element inside the product
+      let value = title.innerHTML || title.innerText || title.textContent;
+
+      if (value.toUpperCase().indexOf(filter) > -1) {
+          item.style.display = ""; // Show the product if it matches the search
+      } else {
+          item.style.display = "none"; // Hide the product if it doesn't match
+      }
+  }
+}

@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <head>
 <title>GoBook-Cart</title>
 <style>
@@ -107,50 +109,11 @@ table button:hover {
     background-color: #218838;
 }
 
-/*
-#cartTable{
-    width: 100%;
-	border: 5px solid rgb(0, 153, 0);
-	border-spacing: 4px;
-	padding: 2px;
-	margin: none;
-	border-collapse: separate;
-}
-
-caption{
-	margin: none;
-	padding: 10px;
-	font: italic;
-}
-
-tr:nth-child(odd){
-	background-color: rgb(217, 217, 217);
-}
-
-tr:nth-child(even){
-	background-color: rgb(191, 191, 191);
-}
-
-th{
-	margin: none;
-	padding: 10px;
-	color: rgb(255, 255, 255);
-	background-color: rgb(51, 51, 153);
-}
-
-td{
-	margin: none;
-	padding: 10px;
-}
-*/
-
 </style>
 </head>
-
-<?php //include('includes/header.php');?>
+<body>
 <div class="shopping-cart">
     <h1>My Cart</h1>
-
 <?php
 session_start();
 $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
@@ -227,4 +190,6 @@ if (!$conn) {
         </form>
     </div>
 </div>
-<?php include('includes/footer.php');?>
+<?php include('../includes/footer.php'); ?>
+</body>
+</html>

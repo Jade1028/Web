@@ -8,8 +8,8 @@
         </ul>
     </nav>
     <div class="search">
-        <input type="text" placeholder="Search here">
-        <button type="submit">Search</button>
+        <input type="text" id="searchInput" placeholder="Search here" onkeyup="search()">
+        <i class="fa-solid fa-magnifying-glass"></i>
     </div>
     <div class="avatar">
         <img src="/Web/images/avatar.png" alt="avatar" title="avatar" id="avatar">

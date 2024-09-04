@@ -3,6 +3,7 @@
     <head>
         <title>GoBook</title>
         <link rel="stylesheet" href ="style/mystyle.css">
+        <script src="https://kit.fontawesome.com/88976616f3.js" crossorigin="anonymous"></script>
     </head>
     <body>
     <?php
