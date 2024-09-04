@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($stmt->execute()) {
-        header("Location: cart.php"); // Redirect back to the cart page to refresh it
+        header("Location: index.php"); // Redirect back to the cart page to refresh it
         exit();
     } else {
         echo "Error updating cart: " . $conn->error;

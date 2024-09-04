@@ -23,11 +23,11 @@
         <?php 
         if (isset($_SESSION['email'])) 
         {
-            include('account.php'); // User is logged in, show account details
+            include(__DIR__ . '/../account.php'); // User is logged in, show account details
         } 
         else 
         {
-            include('login.php'); // User is not logged in, show login form
+            include(__DIR__ . '/../login.php'); // User is not logged in, show login form
         } 
         ?> 
     </div>

@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>GoBook-Cart</title>
+<link rel="stylesheet" href ="../style/mystyle.css">
 <style>
 h1 {
     font-size: 24px;
@@ -65,7 +66,7 @@ table input[type="number"] {
     text-align: center;
 }
 
-table button {
+table button{
     padding: 8px 16px;
     background-color: #007bff;
     color: #fff;
@@ -111,11 +112,16 @@ table button:hover {
 
 </style>
 </head>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include('../includes/header.php');
+?>
 <body>
 <div class="shopping-cart">
     <h1>My Cart</h1>
 <?php
-session_start();
 $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
 $email = $_SESSION['email'];
 
@@ -152,7 +158,7 @@ if (!$conn) {
                 $grandTotal += $totalPrice; // Add to grand total
             ?>
                 <tr>
-                    <td><img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="Product Image" width="100"></td>
+                    <td><img src="../<?php echo htmlspecialchars($row['book_image']); ?>" alt="Product Image" width="100"></td>
                     <td><h2><?php echo htmlspecialchars($row['book_name']); ?></h2></td>
                     <td><?php echo 'RM ' . htmlspecialchars($row['price']); ?></td>
                     <td><?php echo htmlspecialchars($row['quantity']); ?></td>
