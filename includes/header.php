@@ -1,5 +1,5 @@
 <header>
-    <div class="logo"><a href ="">GoBook</a></div>
+    <div class="logo"><a href ="/Web/index">GoBook</a></div>
     <nav>
         <ul>
             <li><a href ="/Web/index">Home</a></li>

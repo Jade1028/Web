@@ -191,7 +191,7 @@ if (!$conn) {
 
     <!-- Proceed to Checkout Button -->
     <div class="checkout">
-        <form action="checkout.php" method="POST">
+        <form action="payment.php" method="POST">
             <button type="submit" class="checkout-button">Proceed to Checkout</button>
         </form>
     </div>
