@@ -22,5 +22,5 @@ if (!isset($_SESSION['email']))
         <li>Gender: <?php echo htmlspecialchars($_SESSION['gender']); ?></li>
         <li>Phone: <?php echo htmlspecialchars($_SESSION['phone']); ?></li>
     </ul>
-    <a href="logout.php">Logout</a>
+    <a href="/Web/logout.php">Logout</a>
 </div>
