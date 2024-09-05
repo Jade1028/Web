@@ -265,6 +265,30 @@ if (session_status() === PHP_SESSION_NONE) {
          'category' => 'Historical Fiction'
       ],
       [
+         'image' => 'images/hf_4.png',
+         'name' => 'Ne\'er Duke Well',
+         'author' => 'Alexandra Vasti',
+         'price' => '55',
+         'description_file' => 'description/hf_4.txt',
+         'category' => 'Historical Fiction'
+      ],
+      [
+         'image' => 'images/hf_5.png',
+         'name' => 'The Women',
+         'author' => 'Kristin Hannah',
+         'price' => '99',
+         'description_file' => 'description/hf_5.txt',
+         'category' => 'Historical Fiction'
+      ],
+      [
+         'image' => 'images/hf_6.png',
+         'name' => 'The King\'s Witches',
+         'author' => 'Kristin Hannah',
+         'price' => '79',
+         'description_file' => 'description/hf_6.txt',
+         'category' => 'Historical Fiction'
+      ],
+      [
          'image' => 'images/k_1.png',
          'name' => 'Harry Potter and the Philosopher\'s Stone',
          'author' => 'Rowling, J. K.',
@@ -314,10 +338,10 @@ if ($result->num_rows > 0) {
 ?> 
    <div class="container">
       <h1 class="title">OUR PRODUCTS</h1>
-            <?php
-            // Loop through each product and display it
-            while ($row = $result->fetch_assoc()) {
-               $category = htmlspecialchars($row['category']);
+      <?php
+      // Loop through each product and display it
+         while ($row = $result->fetch_assoc()) {
+            $category = htmlspecialchars($row['category']);
 
           // Check if the category has changed
           if ($category != $currentCategory) {

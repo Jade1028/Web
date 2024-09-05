@@ -80,17 +80,29 @@ previewBox.forEach(preview => {
 function search() {
   let filter = document.getElementById('searchInput').value.toUpperCase();
   let items = document.querySelectorAll('.product');
-  let titles = document.getElementsByTagName('h3');
+  let categories = document.querySelectorAll('.same-types');
 
-  for (let i = 0; i < titles.length; i++) {
-      let item = items[i]; // Select the product container
-      let title = titles[i]; // Get the <h3> element inside the product
-      let value = title.innerHTML || title.innerText || title.textContent;
+  // Loop through all the product items and filter them
+  items.forEach(item => {
+    let title = item.querySelector('h3'); // Get the <h3> inside each product
+    let value = title.textContent || title.innerText; // Get the text content of the title
 
-      if (value.toUpperCase().indexOf(filter) > -1) {
-          item.style.display = ""; // Show the product if it matches the search
-      } else {
-          item.style.display = "none"; // Hide the product if it doesn't match
-      }
-  }
+    // Check if the product title matches the filter
+    if (value.toUpperCase().indexOf(filter) > -1) {
+      item.style.display = "";
+    } else {
+      item.style.display = "none";
+    }
+  });
+
+  // Loop through all category containers to check if they have any visible products
+  categories.forEach(category => {
+    let visibleProducts = category.querySelectorAll('.product:not([style*="display: none"])');
+
+    if (visibleProducts.length > 0) {
+      category.style.display = "";
+    } else {
+      category.style.display = "none";
+    }
+  });
 }
