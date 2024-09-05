@@ -174,40 +174,40 @@ if ($result->num_rows > 0) {
    $currentCategory = "";
 ?> 
    <div class="container">
-      <h1 class="title">OUR PRODUCTS</h1>
-      <?php
-      // Loop through each product and display it
-         while ($row = $result->fetch_assoc()) {
-            $category = htmlspecialchars($row['category']);
+    <h1 class="title">OUR PRODUCTS</h1>
+    <?php
+    // Loop through each product and display it
+        while ($row = $result->fetch_assoc()) {
+        $category = htmlspecialchars($row['category']);
 
-          // Check if the category has changed
-          if ($category != $currentCategory) {
-              // Close the previous category's container, if it's not the first one
-              if ($currentCategory != "") {
-                  echo '</div>'; // Close products-container
-                  echo '</div>'; // Close same-types
-              }
+        // Check if the category has changed
+        if ($category != $currentCategory) {
+            // Close the previous category's container, if it's not the first one
+            if ($currentCategory != "") {
+                echo '</div>'; // Close products-container
+                echo '</div>'; // Close same-types
+            }
 
-              // Update current category
-              $currentCategory = $category;
+            // Update current category
+            $currentCategory = $category;
 
-              // Start a new category section
-              echo '<div class="same-types">';
-              echo '<h5>' . $currentCategory . '</h5>';
-              echo '<div class="products-container">';
-          }
-            ?>
-               <div class="product" data-name="product-<?php echo htmlspecialchars($row['id']); ?>" book-name="<?php echo htmlspecialchars($row['book_name']); ?>">
-               <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="Product Image">
-               <h3><?php echo htmlspecialchars($row['book_name']); ?></h3>
-               <div class="price"><?php echo 'RM'. htmlspecialchars($row['price']); ?></div>
-               </div>
+            // Start a new category section
+            echo '<div class="same-types">';
+            echo '<h5>' . $currentCategory . '</h5>';
+            echo '<div class="products-container">';
+        }
+        ?>
+            <div class="product" data-name="product-<?php echo htmlspecialchars($row['id']); ?>" book-name="<?php echo htmlspecialchars($row['book_name']); ?>">
+            <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="Product Image">
+            <h3><?php echo htmlspecialchars($row['book_name']); ?></h3>
+            <div class="price"><?php echo 'RM'. htmlspecialchars($row['price']); ?></div>
+            </div>
             <?php
             }
             ?>
-         </div> <!-- Close products-container -->
+        </div> <!-- Close products-container -->
       </div> <!-- Close same-types -->
-   </div> <!-- Close container -->
+    </div> <!-- Close container -->
 
       <div class="products-preview">
       <?php
