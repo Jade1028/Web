@@ -2,59 +2,48 @@
 <html>  
     <head>
         <title>Registration page</title>
-        <link rel="stylesheet" href ="style/mystyle.css">
+        <link rel="stylesheet" href ="style/style1.css">
     </head>
 
     <body>
-        <header>        
-            <h1>Register</h1>
-        </header>
-
+    <div class="container">
+    <h1>Registration</h1>
     <div class="content">
         <form id = "registrationForm" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
             <label for = "name"> Name: </label>
             <input type = "text" id = "name" name = "name">
             <div id = "nameError"></div>
-            <br>
 
             <label for = "dob"> Date of Birth: </label>
             <input type = "date" id = "dob" name = "dob">
             <div id = "dobError"></div>
-            <br>
 
-            Gender:  
-            <input type = "radio" id = "male" name = "gender"> Male
-            <input type = "radio" id = "female" name = "gender"> Female
-            <input type = "radio" id = "other" name = "gender"> Other
+            <label class="gender">Gender:</label>  
+            <input type = "radio" id = "male" name = "gender">Male
+            <input type = "radio" id = "female" name = "gender">Female
+            <input type = "radio" id = "other" name = "gender">Other
             <div id = "genderError"></div>
 
             <label for = "phone"> Phone Number: </label>
             <input type = "tel" id = "phone" name = "phone">
             <div id = "phoneError"></div>
-            <br>
 
             <label for = "email"> Email Address: </label>
             <input type = "email" id = "email" name = "email">
             <div id = "emailError"></div>
-            <br>
 
             <label for = "pw"> Password: </label>
             <input type = "password" id = "pw" name = "pw">
             <div id = "pwError"></div>
-            <br>
 
-            <br><br>
             <input type = "button" value="Register" onclick="validateForm()">
         </form>
 
         <br>
-        <a href = "index.php">Login</a>
+        <p>Already have a account? <a href = "index.php">Login here</a></p>
+    </div>
     </div>
 
-    <br>
-    <?php include('includes/footer.php'); ?>
-
-    
     <script>
         function validateForm() 
         {

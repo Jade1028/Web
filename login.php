@@ -1,17 +1,26 @@
-
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Page</title>
+        <link rel="stylesheet" href ="style/style1.css">
+    </head>
+<body>
+<div class="container">
+<h1>Welcome to GoBook!</h1>
 <div class = "content">
 <form id="loginForm" method="post" action="">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
+    <label for="email"></label>
+    <input type="email" id="email" name="email" placeholder="Email" required>
+    <label for="password"></label>
+    <input type="password" id="password" name="password" placeholder="Password" required>
     <button type="submit">Login</button>
 </form>
 <br>
-<a href = "Register.php">Register</a>
+<p>Dont have an account? <a href = "Register.php">Register here</a></p>
 </div>
+</div>
+</body>
+</html>
 
 <?php
 if (session_status() === PHP_SESSION_NONE) {

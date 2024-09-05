@@ -5,7 +5,11 @@
 	<link rel="stylesheet" href ="../style/mystyle.css">
 </head>
 <body>
-<?php include('../includes/header.php'); ?>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include('../includes/header.php');?>
 <h1>Contact Us</h1>
 
 <div id="contact" class="content">
