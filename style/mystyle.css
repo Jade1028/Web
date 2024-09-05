@@ -112,12 +112,13 @@ nav ul li a:hover{
 }
 
 #pageFooter{
+    position: relative;
+    clear: both;
     bottom: 0;
 	font-size: 0.9em;
     width: 100%;
 	margin: 0px;
 	padding: 20px;
-	border-top-style: dotted 1px black;
     background-color: rgb(255, 235, 205);
     text-align: center;
 }
