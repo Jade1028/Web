@@ -133,7 +133,47 @@ if (session_status() === PHP_SESSION_NONE) {
          'description_file' => 'description/k_1.txt',
          'category' => 'Kids'
       ],
-      // Add more products here as needed
+      [
+        'image' => 'images/k_2.png',
+        'name' => 'Diary of a Wimpy Kid#1',
+        'author' => 'Jeff Kinney',
+        'price' => '40',
+        'description_file' => 'description/k_2.txt',
+        'category' => 'Kids'
+     ],
+     [
+        'image' => 'images/k_3.png',
+        'name' => 'The Swifts: A Dictionary of Scoundrels',
+        'author' => 'Beth Lincoln, Claire Powell',
+        'price' => '50',
+        'description_file' => 'description/k_3.txt',
+        'category' => 'Kids'
+     ],
+     [
+        'image' => 'images/k_4.png',
+        'name' => 'When I Feel Red',
+        'author' => 'Lily Bailey',
+        'price' => '60',
+        'description_file' => 'description/k_4.txt',
+        'category' => 'Kids'
+     ],
+     [
+        'image' => 'images/k_5.png',
+        'name' => 'The Christmas Pig',
+        'author' => 'J. K. Rowling',
+        'price' => '45',
+        'description_file' => 'description/k_5.txt',
+        'category' => 'Kids'
+     ],
+     [
+        'image' => 'images/k_6.png',
+        'name' => 'Dog Man 6: Brawl Of The Wild',
+        'author' => 'Dav Pilkey',
+        'price' => '35',
+        'description_file' => 'description/k_6.txt',
+        'category' => 'Kids'
+     ]
+      // Products to be addded
   ];
   
   foreach ($products as $product) {

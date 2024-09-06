@@ -10,11 +10,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include('../includes/header.php');?>
-<h1>Contact Us</h1>
 
-<div id="contact" class="content">
+<div class="contact">
     <form id="contactForm" action="post-message.php" method="post">
-	
+    <h1>Contact Us</h1>
         <label for="salutation">Salutation: </label>
         <select id="salutation" name="salutation" required>
 		<option disabled selected value> -- Select a Salutation -- </option>

@@ -10,8 +10,9 @@ h1 {
 }
 
 .shopping-cart {
+    min-height: 100vh;
     max-width: 900px;
-    margin: 0 auto;
+    margin: 20px auto;
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -167,7 +168,7 @@ if (!$conn) {
                         <form action="update_cart.php" method="POST" style="display: inline;">
                             <input type="number" name="quantity" value="<?php echo htmlspecialchars($row['quantity']); ?>" min="0">
                             <input type="hidden" name="book_name" value="<?php echo htmlspecialchars($row['book_name']); ?>">
-                            <button type="submit" class="edit-button">Edit</button>
+                            <button type="edit" class="edit-button">Edit</button>
                         </form>
                     </td>
                     <td><?php echo 'RM ' . htmlspecialchars($totalPrice); ?></td> <!-- Display total price -->
