@@ -28,23 +28,9 @@
 
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-
-    session_set_cookie_params(0);
-    session_start();
+   session_start();
 }
-
-if (!isset($_SESSION['email']))   
-{
-    $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
-    if($conn)
-    {
-        $sql = "DELETE FROM cart WHERE email = 'temporary'";
-        $conn->query($sql);
-    }
-    $conn->close();
     $_SESSION['email'] = "temporary";
-}
-
 
    // Database connection
    $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
@@ -304,56 +290,56 @@ if ($result->num_rows > 0) {
 
    if (isset($_POST['cart'])) 
    {
-    $email = $_SESSION['email'];
-    $cartBookName = $_POST['book_name'];
-    $cartBookImage = $_POST['book_image'];
-    $cartBookPrice = $_POST['price'];
-    $cartQuantity = $_POST['quantity'];
+       $email = $_SESSION['email'];
+            $cartBookName = $_POST['book_name'];
+            $cartBookImage = $_POST['book_image'];
+            $cartBookPrice = $_POST['price'];
+            $cartQuantity = $_POST['quantity'];
 
-    $checkStmt = $conn->prepare("SELECT quantity FROM Cart WHERE email = ? AND book_name = ?");
-    $checkStmt->bind_param('ss', $email, $cartBookName);
-    $checkStmt->execute();
-    $result = $checkStmt->get_result();
-
-    if ($result->num_rows > 0) 
-    {
-        // If the product exists, update the quantity
-        $row = $result->fetch_assoc();
-        $newQuantity = $row['quantity'] + $cartQuantity;
-
-        $updateStmt = $conn->prepare("UPDATE Cart SET quantity = ? WHERE email = ? AND book_name = ?");
-        $updateStmt->bind_param('iss', $newQuantity, $email, $cartBookName);
-
-        if ($updateStmt->execute()) 
-        {
-            echo "Product quantity updated in the cart successfully.";
-        } 
-        else 
-        {
-            echo "Error updating product quantity: " . $updateStmt->error;
-        }
-
-    $updateStmt->close();
-    } 
-    else 
-    {
-        // If the product does not exist, insert a new row
-        $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
-        $cartStmt->bind_param('sssdi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
-
-        if ($cartStmt->execute()) 
-        {
-            echo "Product added to cart successfully.";
-        } 
-        else 
-        {
-            echo "Error: " . $cartStmt->error;
-        }
-
-        $cartStmt->close();
-    }
-    $checkStmt->close();
-    $conn->close();
+            $checkStmt = $conn->prepare("SELECT quantity FROM Cart WHERE email = ? AND book_name = ?");
+            $checkStmt->bind_param('ss', $email, $cartBookName);
+            $checkStmt->execute();
+            $result = $checkStmt->get_result();
+  
+            if ($result->num_rows > 0) 
+            {
+                // If the product exists, update the quantity
+                $row = $result->fetch_assoc();
+                $newQuantity = $row['quantity'] + $cartQuantity;
+  
+                $updateStmt = $conn->prepare("UPDATE Cart SET quantity = ? WHERE email = ? AND book_name = ?");
+                $updateStmt->bind_param('iss', $newQuantity, $email, $cartBookName);
+  
+                if ($updateStmt->execute()) 
+                {
+                    echo "Product quantity updated in the cart successfully.";
+                } 
+                else 
+                {
+                    echo "Error updating product quantity: " . $updateStmt->error;
+                }
+  
+            $updateStmt->close();
+            } 
+            else 
+            {
+                // If the product does not exist, insert a new row
+                $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
+                $cartStmt->bind_param('sssdi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
+  
+                if ($cartStmt->execute()) 
+                {
+                    echo "Product added to cart successfully.";
+                } 
+                else 
+                {
+                    echo "Error: " . $cartStmt->error;
+                }
+  
+                $cartStmt->close();
+            }
+            $checkStmt->close();
+            $conn->close();
       
    }
 
