@@ -1,16 +1,16 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) 
 {
+    session_set_cookie_params(0);
     session_start();
 }
 
-if (!isset($_SESSION['email']))
+if ($_SESSION['email'] == "temporary")
 {
     header('Location: login.php');
     exit();
 }
 ?>
-
 
 <div class = "content">
     <h1>Welcome, <?php echo $_SESSION['name']; ?>!</h1>
