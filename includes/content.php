@@ -287,50 +287,71 @@ if ($result->num_rows > 0) {
 
    echo'</div>'; //Close container
 
-   if (isset($_POST['cart'])) {
-      $email = $_SESSION['email'];
-      $cartBookName = $_POST['book_name'];
-      $cartBookImage = $_POST['book_image'];
-      $cartBookPrice = $_POST['price'];
-      $cartQuantity = $_POST['quantity'];
+   if (isset($_POST['cart'])) 
+   {
+        if (isset($_SESSION['email']))
+        {
+            $email = $_SESSION['email'];
+            $cartBookName = $_POST['book_name'];
+            $cartBookImage = $_POST['book_image'];
+            $cartBookPrice = $_POST['price'];
+            $cartQuantity = $_POST['quantity'];
 
-      $checkStmt = $conn->prepare("SELECT quantity FROM Cart WHERE email = ? AND book_name = ?");
-      $checkStmt->bind_param('ss', $email, $cartBookName);
-      $checkStmt->execute();
-      $result = $checkStmt->get_result();
+            $checkStmt = $conn->prepare("SELECT quantity FROM Cart WHERE email = ? AND book_name = ?");
+            $checkStmt->bind_param('ss', $email, $cartBookName);
+            $checkStmt->execute();
+            $result = $checkStmt->get_result();
   
-      if ($result->num_rows > 0) {
-          // If the product exists, update the quantity
-          $row = $result->fetch_assoc();
-          $newQuantity = $row['quantity'] + $cartQuantity;
+            if ($result->num_rows > 0) 
+            {
+                // If the product exists, update the quantity
+                $row = $result->fetch_assoc();
+                $newQuantity = $row['quantity'] + $cartQuantity;
   
-          $updateStmt = $conn->prepare("UPDATE Cart SET quantity = ? WHERE email = ? AND book_name = ?");
-          $updateStmt->bind_param('iss', $newQuantity, $email, $cartBookName);
+                $updateStmt = $conn->prepare("UPDATE Cart SET quantity = ? WHERE email = ? AND book_name = ?");
+                $updateStmt->bind_param('iss', $newQuantity, $email, $cartBookName);
   
-          if ($updateStmt->execute()) {
-              echo "Product quantity updated in the cart successfully.";
-          } else {
-              echo "Error updating product quantity: " . $updateStmt->error;
-          }
+                if ($updateStmt->execute()) 
+                {
+                    echo "Product quantity updated in the cart successfully.";
+                } 
+                else 
+                {
+                    echo "Error updating product quantity: " . $updateStmt->error;
+                }
   
-          $updateStmt->close();
-      } else {
-          // If the product does not exist, insert a new row
-          $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
-          $cartStmt->bind_param('sssdi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
+            $updateStmt->close();
+            } 
+            else 
+            {
+                // If the product does not exist, insert a new row
+                $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
+                $cartStmt->bind_param('sssdi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
   
-          if ($cartStmt->execute()) {
-              echo "Product added to cart successfully.";
-          } else {
-              echo "Error: " . $cartStmt->error;
-          }
+                if ($cartStmt->execute()) 
+                {
+                    echo "Product added to cart successfully.";
+                } 
+                else 
+                {
+                    echo "Error: " . $cartStmt->error;
+                }
   
-          $cartStmt->close();
-      }
-  
-      $checkStmt->close();
+                $cartStmt->close();
+            }
+            $checkStmt->close();
+            $conn->close();
+        }
+        else
+        {
+            $_SESSION['book_name'] = $_POST['book_name'];
+            $_SESSION['book_image'] = $_POST['book_image'];
+            $_SESSION['price'] = $_POST['price'];
+            $_SESSION['quantity'] = $_POST['quantity'];
+        }
+      
    }
-$conn->close();
+
 
 ?>
 
