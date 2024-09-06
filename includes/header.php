@@ -21,7 +21,7 @@
     <div class="popup-content">
         <span class="close">×</span>
         <?php 
-        if ($_SESSION['email']!="temporary") 
+        if (isset($_SESSION['email'])) 
         {
             include(__DIR__ . '/../account.php'); // User is logged in, show account details
         } 
