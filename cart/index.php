@@ -123,6 +123,25 @@ include('../includes/header.php');
 <div class="shopping-cart">
     <h1>My Cart</h1>
 <?php
+
+$servername = "localhost";
+$username = "root";
+$DBpassword = "";
+
+$conn = new mysqli($servername, $username, $DBpassword);
+
+if ($conn->connect_error) 
+{
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Create database if it doesn't exist
+$sql = "CREATE DATABASE IF NOT EXISTS GoBookDB";
+if ($conn->query($sql) === FALSE) 
+{
+    echo "Error creating database: " . $conn->error;
+}
+
 $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
 $email = $_SESSION['email'];
 

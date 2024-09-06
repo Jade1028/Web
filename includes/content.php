@@ -43,7 +43,7 @@ if (session_status() === PHP_SESSION_NONE) {
       book_image VARCHAR(255) NOT NULL,
       book_name VARCHAR(255) NOT NULL,
       author VARCHAR(255) NOT NULL,
-      price INT NOT NULL,
+      price DECIMAL(10,2) NOT NULL,
       description TEXT NOT NULL,
       category VARCHAR(255) NOT NULL
   )";
@@ -58,7 +58,7 @@ if (session_status() === PHP_SESSION_NONE) {
       email VARCHAR(255) NOT NULL,
       book_image VARCHAR(255) NOT NULL,
       book_name VARCHAR(255) NOT NULL,
-      price INT NOT NULL,
+      price DECIMAL(10,2) NOT NULL,
       quantity INT NOT NULL
    )"; 
 
@@ -80,7 +80,7 @@ if (session_status() === PHP_SESSION_NONE) {
           'image' => 'images/hf_1.png',
           'name' => 'The Bright Sword',
           'author' => 'Lev Grossman',
-          'price' => '65',
+          'price' => 65,
           'description_file' => 'description/hf_1.txt',
           'category' => 'Historical Fiction'
       ],
@@ -89,7 +89,7 @@ if (session_status() === PHP_SESSION_NONE) {
          'image' => 'images/hf_2.png',
          'name' => 'The Lion Women of Tehran',
          'author' => 'Marjan Kamali',
-         'price' => '70',
+         'price' => 70,
          'description_file' => 'description/hf_2.txt',
          'category' => 'Historical Fiction'
      ],
@@ -97,7 +97,7 @@ if (session_status() === PHP_SESSION_NONE) {
          'image' => 'images/hf_3.png',
          'name' => 'The Briar Club',
          'author' => 'Kate Quinn',
-         'price' => '50',
+         'price' => 50,
          'description_file' => 'description/hf_3.txt',
          'category' => 'Historical Fiction'
       ],
@@ -105,7 +105,7 @@ if (session_status() === PHP_SESSION_NONE) {
          'image' => 'images/hf_4.png',
          'name' => 'Ne\'er Duke Well',
          'author' => 'Alexandra Vasti',
-         'price' => '55',
+         'price' => 55,
          'description_file' => 'description/hf_4.txt',
          'category' => 'Historical Fiction'
       ],
@@ -113,7 +113,7 @@ if (session_status() === PHP_SESSION_NONE) {
          'image' => 'images/hf_5.png',
          'name' => 'The Women',
          'author' => 'Kristin Hannah',
-         'price' => '99',
+         'price' => 99,
          'description_file' => 'description/hf_5.txt',
          'category' => 'Historical Fiction'
       ],
@@ -121,7 +121,7 @@ if (session_status() === PHP_SESSION_NONE) {
          'image' => 'images/hf_6.png',
          'name' => 'The King\'s Witches',
          'author' => 'Kristin Hannah',
-         'price' => '79',
+         'price' => 79,
          'description_file' => 'description/hf_6.txt',
          'category' => 'Historical Fiction'
       ],
@@ -129,7 +129,7 @@ if (session_status() === PHP_SESSION_NONE) {
          'image' => 'images/k_1.png',
          'name' => 'Harry Potter and the Philosopher\'s Stone',
          'author' => 'Rowling, J. K.',
-         'price' => '45',
+         'price' => 45,
          'description_file' => 'description/k_1.txt',
          'category' => 'Kids'
       ],
@@ -137,7 +137,7 @@ if (session_status() === PHP_SESSION_NONE) {
         'image' => 'images/k_2.png',
         'name' => 'Diary of a Wimpy Kid#1',
         'author' => 'Jeff Kinney',
-        'price' => '40',
+        'price' => 40,
         'description_file' => 'description/k_2.txt',
         'category' => 'Kids'
      ],
@@ -145,7 +145,7 @@ if (session_status() === PHP_SESSION_NONE) {
         'image' => 'images/k_3.png',
         'name' => 'The Swifts: A Dictionary of Scoundrels',
         'author' => 'Beth Lincoln, Claire Powell',
-        'price' => '50',
+        'price' => 50,
         'description_file' => 'description/k_3.txt',
         'category' => 'Kids'
      ],
@@ -153,7 +153,7 @@ if (session_status() === PHP_SESSION_NONE) {
         'image' => 'images/k_4.png',
         'name' => 'When I Feel Red',
         'author' => 'Lily Bailey',
-        'price' => '60',
+        'price' => 60,
         'description_file' => 'description/k_4.txt',
         'category' => 'Kids'
      ],
@@ -161,7 +161,7 @@ if (session_status() === PHP_SESSION_NONE) {
         'image' => 'images/k_5.png',
         'name' => 'The Christmas Pig',
         'author' => 'J. K. Rowling',
-        'price' => '45',
+        'price' => 45,
         'description_file' => 'description/k_5.txt',
         'category' => 'Kids'
      ],
@@ -169,7 +169,7 @@ if (session_status() === PHP_SESSION_NONE) {
         'image' => 'images/k_6.png',
         'name' => 'Dog Man 6: Brawl Of The Wild',
         'author' => 'Dav Pilkey',
-        'price' => '35',
+        'price' => 35,
         'description_file' => 'description/k_6.txt',
         'category' => 'Kids'
      ]
@@ -193,7 +193,7 @@ if (session_status() === PHP_SESSION_NONE) {
       if ($checkStmt->num_rows === 0) {
          // Prepare SQL statement for inserting new product
          $stmt = $conn->prepare("INSERT INTO Product (book_image, book_name, author, price, description, category) VALUES (?, ?, ?, ?, ?, ?)");
-         $stmt->bind_param('ssssss', $imagePath, $bookName, $author, $price, $description, $category);
+         $stmt->bind_param('sssdss', $imagePath, $bookName, $author, $price, $description, $category);
          
          // Execute SQL statement
          if (!($stmt->execute())) {  
@@ -317,7 +317,7 @@ if ($result->num_rows > 0) {
       } else {
           // If the product does not exist, insert a new row
           $cartStmt = $conn->prepare("INSERT INTO Cart (email, book_image, book_name, price, quantity) VALUES (?, ?, ?, ?, ?)");
-          $cartStmt->bind_param('ssssi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
+          $cartStmt->bind_param('sssdi', $email, $cartBookImage, $cartBookName, $cartBookPrice, $cartQuantity);
   
           if ($cartStmt->execute()) {
               echo "Product added to cart successfully.";
