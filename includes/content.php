@@ -192,8 +192,56 @@ $conn->select_db("GoBookDB");
         'price' => 35,
         'description_file' => 'description/k_6.txt',
         'category' => 'Kids'
+     ],
+     [
+        'image' => 'images/m_1.png',
+        'name' => 'SPY×FAMILY 3',
+        'author' => 'Tatsuya Endo',
+        'price' => 45,
+        'description_file' => 'description/m_1.txt',
+        'category' => 'Manga'
+     ],
+     [
+        'image' => 'images/m_2.png',
+        'name' => 'Jujutsu Kaisen 22',
+        'author' => 'Gege Akutami',
+        'price' => 45,
+        'description_file' => 'description/m_2.txt',
+        'category' => 'Manga'
+     ],
+     [
+        'image' => 'images/m_3.png',
+        'name' => 'Jujutsu Kaisen 28',
+        'author' => 'Gege Akutami',
+        'price' => 50,
+        'description_file' => 'description/m_3.txt',
+        'category' => 'Manga'
+     ],
+     [
+        'image' => 'images/m_4.png',
+        'name' => 'ONE PIECE, Vol.109',
+        'author' => 'Eiichiro Oda',
+        'price' => 59.99,
+        'description_file' => 'description/m_4.txt',
+        'category' => 'Manga'
+     ],
+     [
+        'image' => 'images/m_5.png',
+        'name' => 'Alya Sometimes Hides Her Feelings in Russian, Vol. 5',
+        'author' => 'SunSunSun',
+        'price' => 79.99,
+        'description_file' => 'description/m_5.txt',
+        'category' => 'Manga'
+     ],
+     [
+        'image' => 'images/m_6.png',
+        'name' => 'Attack on Titan, Vol. 16',
+        'author' => 'Hajime Isayama',
+        'price' => 59.99,
+        'description_file' => 'description/m_6.txt',
+        'category' => 'Manga'
      ]
-      // Products to be addded
+      // Products
   ];
   
   foreach ($products as $product) {
@@ -235,6 +283,13 @@ if ($result->num_rows > 0) {
 ?> 
    <div class="container">
     <h1 class="title">OUR PRODUCTS</h1>
+    <select id="category" onchange="categoryNavigation()">
+    <option disabled selected value>--Select a category--</option>
+    <option value="#historical-fiction">Historical Fiction</option>
+    <option value="#kids">Kids</option>
+    <option value="#manga">Manga</option>
+    </select>
+
     <?php
     // Loop through each product and display it
         while ($row = $result->fetch_assoc()) {
@@ -252,7 +307,7 @@ if ($result->num_rows > 0) {
             $currentCategory = $category;
 
             // Start a new category section
-            echo '<div class="same-types">';
+            echo '<div class="same-types" id="' . strtolower(str_replace(' ', '-', $currentCategory)) . '">';
             echo '<h5>' . $currentCategory . '</h5>';
             echo '<div class="products-container">';
         }
@@ -361,11 +416,14 @@ if ($result->num_rows > 0) {
     $conn->close();
       
    }
-
-
 ?>
 
-
-<!--
-https://www.goodreads.com/  our references
--->
+<script>
+    function categoryNavigation() {
+        var selectBox = document.getElementById('category');
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+        if (selectedValue) {
+            window.location.href = selectedValue;
+        }
+    }
+</script>

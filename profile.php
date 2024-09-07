@@ -15,6 +15,7 @@ if (session_status() === PHP_SESSION_NONE) {
 ?>
     <div class="formcontainer">
         <div class="content">
+        <a href="index.php">&laquo; Back</a>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <h1>Edit Profile</h1>
 
@@ -55,7 +56,7 @@ if (session_status() === PHP_SESSION_NONE) {
     $stmt->bind_param("ssss", $name, $phone, $dob, $email);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Profile updated successfully, please login again'); window.location.href = 'index.php';</script>";
+        echo "<script>alert('Profile updated successfully'); window.location.href = 'index.php';</script>";
     } else {
         echo "<script>alert('Error updating profile');</script>";
     }
