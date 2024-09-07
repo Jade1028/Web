@@ -9,6 +9,7 @@
     <div class="formcontainer">
     <h1>Registration</h1>
     <div class="content">
+    <a href="index.php">&laquo; Back</a><br><br>
         <form id = "registrationForm" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
             <label for = "name"> Name: </label>
             <input type = "text" id = "name" name = "name">

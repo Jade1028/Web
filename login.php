@@ -16,6 +16,8 @@
     <input type="submit" value="Login" name="login" class="login">
 </form>
 <br>
+<a href="editpw.php">Forget password</a>
+<br><br>
 <p>Dont have an account? <a href = "/Web/Register.php">Register here</a></p>
 </div>
 </div>

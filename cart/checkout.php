@@ -2,7 +2,11 @@
 <html>
 <head>
 <title>Check Out</title>
-<link rel="stylesheet" href="/Web/style/mystyle.css">
+<style>
+    h1{
+    text-align: center;
+}
+</style>
 </head>
 <?php
 if (session_status() === PHP_SESSION_NONE) {

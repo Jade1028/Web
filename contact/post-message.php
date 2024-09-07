@@ -2,7 +2,11 @@
 <html>
 <head>
 <title>Message</title>
-<link rel="stylesheet" href="/Web/style/mystyle.css">
+<style>
+    h1{
+    text-align: center;
+}
+</style>
 </head>
 <body>
 <h1>Thank you for your enquiry! We will reply you as soon as possible!<br>
