@@ -27,7 +27,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <label for="dob">Date of Birth:</label>
                 <input type="date" id="dob" name="dob" value="<?php echo htmlspecialchars($_SESSION['dob']); ?>">
-                <div id = "dobError"></div>
 
                 <button type="submit" name="update">Update Profile</button>
             </form>
@@ -52,7 +51,7 @@ if (session_status() === PHP_SESSION_NONE) {
     $stmt->bind_param("ssss", $name, $phone, $dob, $email);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Profile updated successfully'); window.location.href = 'index.php';</script>";
+        echo "<script>alert('Profile updated successfully, please login again'); window.location.href = 'index.php';</script>";
     } else {
         echo "<script>alert('Error updating profile');</script>";
     }
