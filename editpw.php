@@ -52,6 +52,7 @@
         $email = $_POST['email'];
         $password = $_POST['password']; // Match the name attribute in the form
         
+
         // Check if email exists in the database
         $stmt = $conn->prepare("SELECT * FROM userinfo WHERE email = ?");
         $stmt->bind_param("s", $email);
@@ -59,6 +60,8 @@
         $result = $stmt->get_result();
     
         if ($result->num_rows > 0) {
+            $_SESSION['password'] = $password;
+
             // Email exists, update the password
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
