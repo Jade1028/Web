@@ -85,6 +85,15 @@ nav ul li a:hover{
 	text-decoration: underline;
 }
 
+.disabled-link {
+    color: grey;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
 .search{
     position: relative;
 }

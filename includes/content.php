@@ -30,6 +30,26 @@
 if (session_status() === PHP_SESSION_NONE) {
    session_start();
 }
+$servername = "localhost";
+$username = "root";
+$DBpassword = "";
+
+$conn = new mysqli($servername, $username, $DBpassword);
+
+if ($conn->connect_error) 
+{
+    die("Connection failed: " . $conn->connect_error);
+}
+        
+// Create database if it doesn't exist
+$sql = "CREATE DATABASE IF NOT EXISTS GoBookDB";
+if ($conn->query($sql) === FALSE) 
+{
+    echo "Error creating database: " . $conn->error;
+}
+        
+// Select the database
+$conn->select_db("GoBookDB");
 
    // Database connection
    $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');

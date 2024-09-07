@@ -9,7 +9,7 @@
     align-content: center;
     }
 
-    .container{
+    .formcontainer{
         min-height:100vh;
         width: 100%;
         display: flex;

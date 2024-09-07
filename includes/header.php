@@ -4,7 +4,13 @@
         <ul>
             <li><a href ="/Web/index">Home</a></li>
             <li><a href ="/Web/contact">Contact Us</a></li>
-            <li><a href ="/Web/cart">View My Cart</a></li>
+            <li>
+            <?php 
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;?>
+            <a href="/Web/cart" <?php if (!$isLoggedIn): ?>class="disabled-link" <?php endif; ?>>View My Cart</a></li>
         </ul>
     </nav>
     <div class="search">

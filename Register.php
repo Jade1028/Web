@@ -6,7 +6,7 @@
     </head>
 
     <body>
-    <div class="container">
+    <div class="formcontainer">
     <h1>Registration</h1>
     <div class="content">
         <form id = "registrationForm" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
@@ -123,27 +123,13 @@
             $email = $_POST['email'];
             $password = $_POST['pw'];
 
-            $servername = "localhost";
-            $username = "root";
-            $DBpassword = "";
+            // Database connection
+            $conn = mysqli_connect('localhost', 'root', '', 'GoBookDB');
 
-            $conn = new mysqli($servername, $username, $DBpassword);
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
 
-            if ($conn->connect_error) 
-            {
-                die("Connection failed: " . $conn->connect_error);
-            }
-        
-            // Create database if it doesn't exist
-            $sql = "CREATE DATABASE IF NOT EXISTS GoBookDB";
-            if ($conn->query($sql) === FALSE) 
-            {
-                echo "Error creating database: " . $conn->error;
-            }
-        
-            // Select the database
-            $conn->select_db("GoBookDB");
-        
             // Create table if it doesn't exist
             $sql = "CREATE TABLE IF NOT EXISTS UserInfo (
                         id INT AUTO_INCREMENT PRIMARY KEY,
