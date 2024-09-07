@@ -46,6 +46,10 @@ if (session_status() === PHP_SESSION_NONE) {
     $phone = $_POST['phone'];
     $dob = $_POST['dob'];
 
+    $_SESSION['name'] = $name;
+    $_SESSION['phone'] = $phone;
+    $_SESSION['dob'] = $dob;
+
     // Prepare and execute the update query
     $stmt = $conn->prepare("UPDATE userinfo SET name = ?, phone = ?, dob = ? WHERE email = ?");
     $stmt->bind_param("ssss", $name, $phone, $dob, $email);
