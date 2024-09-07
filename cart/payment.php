@@ -4,29 +4,17 @@
 <title>Payment</title>
 <link rel="stylesheet" href="/Web/style/mystyle.css">
 <style>
-.button {
-    background-color:#4CAF50; 
-    border:none;
-    color:white; 
-    padding:15px 32px; 
-    text-align:center; 
-    text-decoration:none; 
-    display: inline-block; 
-    font-size: 16px; 
-    margin: 4px 2px; 
-    cursor: pointer; 
-    border-radius: 4px; 
-    transition: background-color 0.3s; 
+.payment {
+    min-height: 100vh;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid #ddd;
 }
 
-.button:hover {
-    background-color: #45a049;
-}
-
-.button:disabled {
-    background-color: #d3d3d3;
-    cursor: not-allowed; 
-}
 </style>
 </head>
 <?php
@@ -37,8 +25,8 @@ include('../includes/header.php');
 ?>
 
 <body>
+<div id="payment" class="payment">
 <h1>Payment</h1>
-<div id="payment" class="content">
     <form id="paymentForm" action="checkout.php" method="post">
 
     <label for="name">Name:</label>
@@ -61,6 +49,8 @@ include('../includes/header.php');
     <input type = "radio" id = "card" name = "payment">Debit/CreditCard <img src="../images/card.png" alt="img" style="width: 30px;
     height: 30px;">
     <input type = "radio" id = "tng" name = "payment">Touch N Go <img src="../images/tng.png" alt="img" style="width: 30px;
+    height: 30px;">
+    <input type = "radio" id = "tng" name = "payment">Online Banking <img src="../images/bank.png" alt="img" style="width: 30px;
     height: 30px;">
     <div id="paymentError"></div>
 

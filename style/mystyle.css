@@ -475,9 +475,13 @@ form div[id$="Error"] {
     margin-bottom: 10px;
 }
 
+textarea{
+    background-color: rgb(225, 225, 225);
+}
 form input[type="button"], 
 form input[type="submit"], 
 form button[type="submit"] {
+    width: 100%;
     padding: 10px 20px;
     background-color: #28a745;
     color: white;
@@ -505,7 +509,7 @@ form button[type="submit"]:hover {
 }
 
 #salutation, #enquirytype{
-    background-color: rgb(185, 181, 181)
+    background-color: rgb(185, 181, 181);
 }
 /* Popup container */
 .popup {

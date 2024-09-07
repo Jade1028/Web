@@ -103,8 +103,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
     $conn->close();
-    } elseif (isset($_POST['cart'])) {
-       echo "<script>alert('Please login before adding product to cart');</script>";
+    } else{
+       echo "<script>alert('Please login to add products to cart!'); window.location.href = 'index.php';</script>";
     }
     
 }else{

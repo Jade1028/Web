@@ -331,11 +331,11 @@ if ($result->num_rows > 0) {
 
         if ($updateStmt->execute()) 
         {
-            echo "Product quantity updated in the cart successfully.";
+            echo "<script>alert('Product added to cart');</script>";
         } 
         else 
         {
-            echo "Error updating product quantity: " . $updateStmt->error;
+            echo "Error: " . $updateStmt->error;
         }
 
     $updateStmt->close();
@@ -348,7 +348,7 @@ if ($result->num_rows > 0) {
 
         if ($cartStmt->execute()) 
         {
-            echo "Product added to cart successfully.";
+            echo "<script>alert('Product added to cart');</script>";
         } 
         else 
         {
