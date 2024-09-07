@@ -17,13 +17,13 @@
                 <input type="email" id="email" name="email" required>
 
                 <label for="pw">New Password:</label>
-                <input type="password" id="pw" name="pw" required>
-                <div id = "pwError"></div>
+                <input type="password" id="pw" name="password" required>
+                <div id="pwError"></div>
 
-                <input type = "button" value="Reset password">
-        </form>
+                <input type="submit" value="Reset password">
+            </form>
         </div>
-    </div>
+    </di>
 
     <script>
         function validateForm() {
@@ -31,8 +31,8 @@
             var password = document.getElementById('pw').value;
             var errorDiv = document.getElementById('pwError');
 
-            if (email === "" || password.length < 6) {
-                errorDiv.textContent = "Please enter a valid email and password must be at least 8 characters long..";
+            if (email === "" || password.length < 8) {
+                errorDiv.textContent = "Please enter a valid email and password must be at least 8 characters long.";
                 return false;
             }
 
@@ -47,11 +47,11 @@
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-
+    
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $email = $_POST['email'];
-        $password = $_POST['password'];
-    
+        $password = $_POST['password']; // Match the name attribute in the form
+        
         // Check if email exists in the database
         $stmt = $conn->prepare("SELECT * FROM userinfo WHERE email = ?");
         $stmt->bind_param("s", $email);
