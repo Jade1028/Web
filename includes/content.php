@@ -417,13 +417,3 @@ if ($result->num_rows > 0) {
       
    }
 ?>
-
-<script>
-    function categoryNavigation() {
-        var selectBox = document.getElementById('category');
-        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-        if (selectedValue) {
-            window.location.href = selectedValue;
-        }
-    }
-</script>

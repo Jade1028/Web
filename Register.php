@@ -20,9 +20,9 @@
             <div id = "dobError"></div>
 
             <label class="gender">Gender:</label>  
-            <input type = "radio" id = "male" name = "gender">Male
-            <input type = "radio" id = "female" name = "gender">Female
-            <input type = "radio" id = "other" name = "gender">Other
+            <input type = "radio" id = "male" name = "gender" value="Male">Male
+            <input type = "radio" id = "female" name = "gender" value="Female">Female
+            <input type = "radio" id = "other" name = "gender" value="Other">Other
             <div id = "genderError"></div>
 
             <label for = "phone"> Phone Number: </label>
@@ -119,7 +119,7 @@
             // Handle the form submission
             $name = $_POST['name'];
             $dob = $_POST['dob'];
-            $gender = $_POST['gender'];
+            $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
             $phone = $_POST['phone'];
             $email = $_POST['email'];
             $password = $_POST['pw'];
@@ -151,7 +151,7 @@
     
             if(mysqli_num_rows($checkResult) > 0)
             {
-                echo 'Email already exists. Please use a different email. ';
+                echo "<script>alert('Email already exists. Please use a different email. ');</script>";
             }
             else
             {
@@ -172,10 +172,10 @@
                 {
                     echo "Error: " . $stmt->error;
                 }
+                $stmt->close();
             }
 
-            // Close the statement and connection
-            $stmt->close();
+            //Close connection
             $conn->close();
         
         }

@@ -106,3 +106,12 @@ function search() {
     }
   });
 }
+
+//category navigation
+function categoryNavigation() {
+  var selectBox = document.getElementById('category');
+  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+  if (selectedValue) {
+      window.location.href = selectedValue;
+  }
+}
