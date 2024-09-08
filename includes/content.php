@@ -292,7 +292,7 @@ if ($result->num_rows > 0) {
 
     <?php
     // Loop through each product and display it
-        while ($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $category = htmlspecialchars($row['category']);
 
         // Check if the category has changed
@@ -324,11 +324,11 @@ if ($result->num_rows > 0) {
       </div> <!-- Close same-types -->
     </div> <!-- Close container -->
 
-      <div class="products-preview">
-      <?php
-      $result->data_seek(0); // Reset the result pointer to the beginning
-      while ($row = $result->fetch_assoc()) {
-      ?>
+    <div class="products-preview">
+    <?php
+    $result->data_seek(0); // Reset the result pointer to the beginning
+    while ($row = $result->fetch_assoc()) {
+    ?>
          <form method="post" action="">
          <div class="preview" data-target="product-<?php echo htmlspecialchars($row['id']); ?>">
             <img src="<?php echo htmlspecialchars($row['book_image']); ?>" alt="Product Image">
