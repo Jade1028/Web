@@ -29,6 +29,9 @@ if (session_status() === PHP_SESSION_NONE) {
                 <label for="dob">Date of Birth:</label>
                 <input type="date" id="dob" name="dob" value="<?php echo htmlspecialchars($_SESSION['dob']); ?>">
 
+                <label for="password">New Password:</label>
+                <input type="password" id="password" name="password" placeholder="Leave blank to keep current password">
+
                 <button type="submit" name="update">Update Profile</button>
             </form>
         </div>
@@ -43,24 +46,40 @@ if (session_status() === PHP_SESSION_NONE) {
     $email = $_SESSION['email'];
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = $_POST['name'];
-    $phone = $_POST['phone'];
-    $dob = $_POST['dob'];
-
-    $_SESSION['name'] = $name;
-    $_SESSION['phone'] = $phone;
-    $_SESSION['dob'] = $dob;
-
-    // Prepare and execute the update query
-    $stmt = $conn->prepare("UPDATE userinfo SET name = ?, phone = ?, dob = ? WHERE email = ?");
-    $stmt->bind_param("ssss", $name, $phone, $dob, $email);
-
-    if ($stmt->execute()) {
-        echo "<script>alert('Profile updated successfully'); window.location.href = 'index.php';</script>";
-    } else {
-        echo "<script>alert('Error updating profile');</script>";
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $dob = $_POST['dob'];
+        $new_password = $_POST['password'];
+    
+        $_SESSION['name'] = $name;
+        $_SESSION['phone'] = $phone;
+        $_SESSION['dob'] = $dob;
+    
+        if (!empty($new_password)) {
+            if (strlen($new_password) >= 8) {
+                // Hash the new password
+                $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+    
+                // Prepare and execute the update query including the password
+                $stmt = $conn->prepare("UPDATE userinfo SET name = ?, phone = ?, dob = ?, password = ? WHERE email = ?");
+                $stmt->bind_param("sssss", $name, $phone, $dob, $hashed_password, $email);
+            } else {
+                // Password is too short, show an error message
+                echo "<script>alert('Password must be at least 8 characters long.'); window.history.back();</script>";
+                exit;
+            }
+        } else {
+            // Prepare and execute the update query without changing the password
+            $stmt = $conn->prepare("UPDATE userinfo SET name = ?, phone = ?, dob = ? WHERE email = ?");
+            $stmt->bind_param("ssss", $name, $phone, $dob, $email);
+        }
+    
+        if ($stmt->execute()) {
+            echo "<script>alert('Profile updated successfully'); window.location.href = 'index.php';</script>";
+        } else {
+            echo "<script>alert('Error updating profile');</script>";
+        }
     }
-}
 
 ?>
 </body>

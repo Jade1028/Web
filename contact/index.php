@@ -29,7 +29,7 @@ include('../includes/header.php');?>
         <div id="nameError" class="error"></div>
         
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
+        <input type="text" id="emailtest" name="emailtest" required>
         <div id="emailError" class="error"></div>
         
         <label for="phonenumber">Phone Number:</label>
@@ -69,7 +69,7 @@ include('../includes/header.php');?>
 	
 	const name=document.getElementById("name").value.trim();
     const salutation=document.getElementById("salutation").value;
-    const email=document.getElementById("email").value.trim();
+    const email=document.getElementById("emailtest").value.trim();
     const phone=document.getElementById("phonenumber").value.trim();
     const enquiryType=document.getElementById("enquirytype").value;
     const message=document.querySelector('textarea[name="message"]').value.trim();
@@ -110,7 +110,7 @@ include('../includes/header.php');?>
 	return !(errors.nameError || errors.salutationError || errors.emailError || errors.phoneError || errors.enquiryError || errors.messageError);
 }
 
- function handleSubmit() {
+function handleSubmit() {
 // Assuming this function is used for submitting the form
     const form = document.getElementById("contactForm");
     form.submit();
