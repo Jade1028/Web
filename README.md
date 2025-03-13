@@ -1,3 +1,6 @@
+# This is for assignment purposes
+You will need Wampserver to load our project. You could refer to the Installation file to download Wampserver to your computer.
+
 # 1. How to use our website?
 In the home page, users can preview all the products in our GoBook web application. If the user wants to purchase our product, the user can add the product to cart but the precondition is the user must have a valid account first. 
 # 2. How to create an account?
